@@ -1,0 +1,40 @@
+body {
+    background-color: rgb(61, 61, 61);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.mainNav{
+    display: flex;
+    justify-content: center;
+}
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.meal-holder {
+    margin-top: 5px;
+    border-radius: 15px;
+    width: 45%;
+    background-color:antiquewhite;
+}
+
+.meal-holder img {
+    height: 10em;
+    width: 100%;
+    border-radius: 15px 15px 0 0;
+    object-fit: cover;
+}
+.meal-holder div {
+    display: flex;
+}
+.meal-holder div p {
+    width: 85%;
+    padding: 5px 12px;
+    font-weight: 650;
+}
+.meal-holder div i {
+    width: 10%;
+}
