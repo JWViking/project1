@@ -5,36 +5,42 @@ body {
     justify-content: center;
 }
 
-.mainNav{
-    display: flex;
-    justify-content: center;
-}
+/* the container that holds all of the food cards */
 .container {
+    margin-top: 10px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
-.meal-holder {
-    margin-top: 5px;
+
+/* this is the card container */
+.card {
+    margin: 10px 5px;
     border-radius: 15px;
     width: 45%;
     background-color:antiquewhite;
 }
 
-.meal-holder img {
+/* these are the children elements inside the card container */
+.card img {
     height: 10em;
     width: 100%;
     border-radius: 15px 15px 0 0;
     object-fit: cover;
 }
-.meal-holder div {
+.card div {
     display: flex;
 }
-.meal-holder div p {
+.card div p {
     width: 85%;
     padding: 5px 12px;
     font-weight: 650;
 }
-.meal-holder div i {
+.card div i {
     width: 10%;
+}
+
+/* class to hide the display, add this class to whatever you want to remove from the display */
+.hidden {
+    display: none;
 }
