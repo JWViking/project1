@@ -30,29 +30,49 @@ $(heartRecipeEl).on("click",function(){
 
 })
 
-/*<div class="card">
- <img src="https://www.themealdb.com/images/media/meals/1548772327.jpg">
-<div>
-    <p>baked salmon with fennel & tomatoes</p>
-    <button class="self-start"><i class="fa fa-heart-o"></i></button>
-</div>
-</div> */
 
 
 function getRecipes(){
     
-    foodContEl.innerHTML = "";
-
-    for(let i=0;)
-
-    console.log("button pressed")
-
-
+    
 
 }
 
 function displayRecipes(){
 
+
+    foodContEl.innerHTML = "";
+
+    for(let i=0; i<favRecipies.length; i++){
+        // var recipeimage = ; will be finished after data is passed in
+        // var recipeTitle = ;       
+        
+        var favCard = document.createElement("div");
+        favCard.setAttribute("class", "card");
+
+        var infoHouse = document.createElement('div');
+
+        var recipeimageEl = document.createElement('img');
+        recipeimageEl.setAttribute("src", recipeimage);
+        
+        var recipeTitleEl = document.createElement('p')
+        recipeTitleEl.textContent = recipeTitle;
+
+        var recipeButtonEl = document.createElement('button')
+        recipeButtonEl.innerHTML = ("class='self-start'><i class='fa fa-heart-o'></i>");
+
+        
+        
+        favCard.appendChild(recipeimageEl);
+        infoHouse.appendChild(recipeTitleEl);
+        infoHouse.appendChild(recipeButtonEl);
+        favCard.appendChild(infoHouse);
+
+        foodContEl.appendChild(favCard);
+
+
+
+    }
 };
 
 favoritesBtn.addEventListener("click", retrieveRecipes);
