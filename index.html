@@ -7,10 +7,13 @@
 
     <title>Title</title>
 
+    <!-- jquery link -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
     <!-- tailwind css link -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- link for icons -->
     <script src="https://use.fontawesome.com/2279913be2.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- custom stylesheet -->
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
@@ -19,12 +22,87 @@
     <!-- all header css is in tailwind classes -->
     <header class="bg-yellow-50 w-full grid place-items-center sticky top-0">
         <h1 class ="font-bold text-center text-xl"> Food app </h1>
+        <!-- search modal button -->
+        <button class="bg-green-500 text-white rounded-md px-8 py-2 text-base font-medium hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300" id="open-btn">
+            Open Modal
+        </button>
+
         <nav class="flex justify-center w-full py-1">
             <button class="w-3/12 mx-1 bg-red-900 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Meals</button>
             <button class="w-3/12 mx-1 bg-red-900 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Drinks</button>
             <button class="w-3/12 mx-1 bg-red-900 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Favorites</button>
         </nav>
     </header>
+
+    <!-- Modal container -->
+    <div class="fixed hidden inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"
+	id="my-modal"> 
+
+        <!--modal content-->
+        <div
+        class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white"
+        >
+        <div class="mt-3 text-center">
+            <div class="flex justify-center static">
+                <h3 class="text-lg leading-6 font-medium text-gray-900">Wine N' Dine</h3>
+                <i class="fa-solid fa-x absolute top-3 right-5 cursor-pointer" id="close-modal"></i>
+            </div>
+            <div class="mt-2 px-7 py-3">
+                <p class="text-sm text-gray-500" id="modal-desc">
+                    Would you like to search for meals or drinks?
+                </p>
+            </div>
+            <!-- Pick Food or Drink -->
+            <div class="items-center px-4 py-3" id="fd-btns">
+                <button id="food-btn" class="px-4 py-2 bg-green-500 text-white font-medium rounded-md w-full hover:bg-green-600">
+                    MEALS
+                </button>
+                <button id="drink-btn" class="mt-3 px-4 py-2 bg-green-500 text-white font-medium rounded-md w-full hover:bg-green-600">
+                    DRINKS
+                </button>
+            </div>
+            <!-- Food Option Buttons -->
+            <div class="hidden items-center p-3" id="food-opt">
+                <button id="all-food" class="p-3 bg-green-500 text-white font-medium rounded-md w-full hover:bg-green-600">
+                    SHOW ALL MEALS
+                </button>
+                <button id="cat-food" class="mt-3 p-3 bg-green-500 text-white font-medium rounded-md w-full hover:bg-green-600">
+                    MEALS BY CATEGORY
+                </button>
+                <!-- Hidden, doesnt do anything yet -->
+                <button id="name-food" class="hidden mt-3 p-3 bg-green-500 text-white font-medium rounded-md w-full hover:bg-green-600">
+                    MEALS BY NAME
+                </button>
+            </div>
+            <!-- Food Category Input -->
+            <div class="hidden" id="food-cat-container">
+                <input type="text" placeholder="Enter a food category..." class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-nonew-full" id="food-cat-input">
+                <button id="sub-food-cat" class="mt-2 p-3 bg-green-500 text-white font-medium rounded-md w-full hover:bg-green-600">
+                    SUBMIT FOOD CAT
+                </button>
+            </div>
+            <div class="hidden" id="drink-cat-container">
+                <input type="text" placeholder="Enter a drink category..." class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-nonew-full" id="drink-cat-input">
+                <button id="sub-drink-cat" class="mt-2 p-3 bg-blue-500 text-white font-medium rounded-md w-full hover:bg-blue-600">
+                    SUBMIT DRINK CAT
+                </button>
+            </div>
+            <!-- Drink Option Buttons -->
+            <div class="hidden items-center px-4 py-3" id="drink-opt">
+                <button id="all-drinks" class="p-3 bg-blue-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-blue-600">
+                    SHOW ALL DRINKS
+                </button>
+                <button id="cat-drinks" class="mt-3 p-3 bg-blue-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-blue-600">
+                    DRINKS BY CATEGORY
+                </button>
+                <!-- Hidden, doesnt do anything yet -->
+                <button id="name-drinks" class="hidden mt-3 p-3 bg-blue-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-blue-600">
+                    DRINKS BY NAME
+                </button>
+            </div>
+        </div>
+        </div>
+    </div>
 
     <!-- food container, all css for this section is in the 'style.css' -->
     <section class="container" id="food-container">
@@ -78,6 +156,10 @@
             </div>
         </div>
     </section>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="./assets/script.js" defer></script>
 </body>
 
 </html>
