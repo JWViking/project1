@@ -65,64 +65,7 @@ var resetModal = function() {
     drinkCatContainerEl.classList.add('hidden');
 }
 
-// We want the modal to open when the Open button is clicked
-openModalBtn.onclick = function() {
-    console.log("open modal")
-    modal.style.display = "block";
-}
-window.onclick = function(event) {
-    if (event.target == modal) {
-        resetModal();
-    }
-}
-//modal event listeners
-document.addEventListener('click', function(e) {
-    if (e.target && e.target.id === 'food-btn') {
-        modalDescEl.classList.add('hidden');
-        foodOptEl.classList.remove('hidden');
-        fdOptEl.classList.add('hidden');
-    } else if (e.target && e.target.id === 'drink-btn') {
-        modalDescEl.classList.add('hidden');
-        drinkOptEl.classList.remove('hidden');
-        fdOptEl.classList.add('hidden');
-    } else if (e.target && e.target.id === 'all-drinks') {
-        resetModal();
-        console.log("all drinks");
-        //calll function to return all drinks
 
-    } else if (e.target && e.target.id === 'cat-drinks') {
-        console.log("cat drinks");
-        drinkModalSearch();
-    } else if (e.target && e.target.id === 'sub-drink-cat') {
-        resetModal();
-        console.log("submit drink cateorgy");
-        // call function to return one category of food
-
-    } else if (e.target && e.target.id === 'name-drinks') {
-        console.log("name drinks");
-    } else if (e.target && e.target.id === 'all-food') {
-        resetModal();
-        getMeals();
-        console.log("all food");
-        //call function to return all food
-
-    } else if (e.target && e.target.id === 'cat-food') {
-        console.log("cat food");
-        foodModalSearch();
-    } else if (e.target && e.target.id === 'sub-food-cat') {
-        resetModal();
-        console.log("submit food cateorgy");
-        // call function to return one category of food
-
-    } else if (e.target && e.target.id === 'name-food') {
-        // call function to return one food item based on name
-        console.log("name food");
-    } else if (e.target && e.target.id === 'close-modal') {
-        console.log("close modal");
-        resetModal();
-    }
-    
-})
 
 //auto complete for categories
 $(function() {
@@ -210,7 +153,7 @@ function displayFavorites(){
     }
 };
 
-favoritesBtn.addEventListener("click", retrieveRecipes);
+
 
 
 // var getMeals = function () {
@@ -277,7 +220,7 @@ var createMealCards = function (data) {
         //add event listener buttonEl.addEventListener();
 
         //create heart icon
-        buttonEl.innerHTML = "<i class='fa fa-heart-o'></i>";
+        buttonEl.innerHTML = "<i class='fa-solid fa-heart'></i>";
         //    var heartEl = document.createElement("i");
         //    heartEl.className = "fa fa-heart-o";
         //    buttonEl.appendChild(heartEl);
@@ -285,3 +228,114 @@ var createMealCards = function (data) {
     };
 
 };
+
+// Fetch drinks from thecocktaildb API
+var getDrinks = function () {
+    fetch("https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a").then(function (response) {
+        response.json().then(function (data) {
+            createDrinkCards(data);
+        });
+    });
+};
+
+// Fetch drink function
+//getDrinks();
+
+var createDrinkCards = function (data) {
+    console.log("here");
+
+    console.log(data);
+
+    var container = document.getElementById("drink-container");
+
+    for (const drink of data.drinks) {
+        console.log(drink);
+        //create card div
+        var divEl = document.createElement("div");
+        divEl.className = "card";
+        container.appendChild(divEl);
+
+        //create image element
+        var imgEl = document.createElement("img");
+        imgEl.src = drink.strDrinkThumb //get help here!!!
+        divEl.appendChild(imgEl);
+
+        //create inner div
+        var innerDivEl = document.createElement("div");
+        divEl.appendChild(innerDivEl);
+
+        //create inner div <p>
+        var pEl = document.createElement("p");
+        pEl.innerHTML = drink.strDrink 
+        innerDivEl.appendChild(pEl);
+
+        //create button
+        var buttonEl = document.createElement("button");
+        buttonEl.className = "self-start"
+        innerDivEl.appendChild(buttonEl);
+    };
+
+};
+
+
+// We want the modal to open when the Open button is clicked
+openModalBtn.onclick = function() {
+    console.log("open modal")
+    modal.style.display = "block";
+}
+window.onclick = function(event) {
+    if (event.target == modal) {
+        resetModal();
+    }
+}
+//modal event listeners
+document.addEventListener('click', function(e) {
+    if (e.target && e.target.id === 'food-btn') {
+        modalDescEl.classList.add('hidden');
+        foodOptEl.classList.remove('hidden');
+        fdOptEl.classList.add('hidden');
+    } else if (e.target && e.target.id === 'drink-btn') {
+        modalDescEl.classList.add('hidden');
+        drinkOptEl.classList.remove('hidden');
+        fdOptEl.classList.add('hidden');
+    } else if (e.target && e.target.id === 'all-drinks') {
+        resetModal();
+        getDrinks();
+        console.log("all drinks");
+        //calll function to return all drinks
+
+    } else if (e.target && e.target.id === 'cat-drinks') {
+        console.log("cat drinks");
+        drinkModalSearch();
+    } else if (e.target && e.target.id === 'sub-drink-cat') {
+        resetModal();
+        console.log("submit drink cateorgy");
+        // call function to return one category of food
+
+    } else if (e.target && e.target.id === 'name-drinks') {
+        console.log("name drinks");
+    } else if (e.target && e.target.id === 'all-food') {
+        resetModal();
+        getMeals();
+        console.log("all food");
+        //call function to return all food
+
+    } else if (e.target && e.target.id === 'cat-food') {
+        console.log("cat food");
+        foodModalSearch();
+    } else if (e.target && e.target.id === 'sub-food-cat') {
+        resetModal();
+        console.log("submit food cateorgy");
+        // call function to return one category of food
+
+    } else if (e.target && e.target.id === 'name-food') {
+        // call function to return one food item based on name
+        console.log("name food");
+    } else if (e.target && e.target.id === 'close-modal') {
+        console.log("close modal");
+        resetModal();
+    }
+    
+})
+
+//favoritesBtn.addEventListener("click", retrieveRecipes);
