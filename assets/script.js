@@ -1,11 +1,13 @@
+// Fetch drinks from thecocktaildb API
 var getDrinks = function () {
-    fetch("https://www.thecocktaildb.com/api/json/v1/1/random.php").then(function (response) {
+    fetch("https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a").then(function (response) {
         response.json().then(function (data) {
             createDrinkCards(data);
         });
     });
 };
 
+// Fetch drink function
 getDrinks();
 
 var createDrinkCards = function (data) {
@@ -32,31 +34,14 @@ var createDrinkCards = function (data) {
         divEl.appendChild(innerDivEl);
 
         //create inner div <p>
-        //innerDivEl.innerHTML = "<p></p><button class='self-start'><i class='fa fa-heart-o></i></button>"
         var pEl = document.createElement("p");
-        pEl.innerHTML = drink.strDrink // get help here!!!
+        pEl.innerHTML = drink.strDrink 
         innerDivEl.appendChild(pEl);
 
         //create button
         var buttonEl = document.createElement("button");
         buttonEl.className = "self-start"
         innerDivEl.appendChild(buttonEl);
-
-        //add event listener buttonEl.addEventListener();
-
-        //create heart icon
-        buttonEl.innerHTML = "<i class='fa fa-heart-o'></i>";
-        //    var heartEl = document.createElement("i");
-        //    heartEl.className = "fa fa-heart-o";
-        //    buttonEl.appendChild(heartEl);
-
     };
-
-
-
-
-
-   
-
 
 };
