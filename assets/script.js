@@ -175,8 +175,8 @@ function displayFavorites(){
 //     };
 // };
 
-var getMeals = function () {
-    fetch("https:www.themealdb.com/api/json/v1/1/filter.php?c=Seafood").then(function (response) {
+var getLetterMeals = function () {
+    fetch("https:www.themealdb.com/api/json/v1/1/search.php?f=b").then(function (response) {
         response.json().then(function (data) {
             createMealCards(data);
         });
@@ -184,13 +184,21 @@ var getMeals = function () {
 };
 
 var getCategoryMeals = function () {
-    fetch("https:www.themealdb.com/api/json/v1/1/categories.php").then(function (response) {
+    fetch("https:www.themealdb.com/api/json/v1/1/filter.php?c=Seafood").then(function (response) {
         response.json().then(function (data) {
             createMealCards(data);
         });
     });
 };
 
+var getMainIngredientMeals = function () {
+    fetch("https:www.themealdb.com/api/json/v1/1/filter.php?i=chicken_breast").then(function (response) {
+        response.json().then(function (data) {
+            createMealCards(data);
+        });
+    });
+ };
+ 
 var getAreaMeals = function () {
     fetch("https:www.themealdb.com/api/json/v1/1/filter.php?a=Canadian").then(function (response) {
         response.json().then(function (data) {
@@ -199,13 +207,19 @@ var getAreaMeals = function () {
     });
 };
 
+var getDefaultMeals = function () {
+    for (let step = 0; step<10; step++) {
+        fetch("https:www.themealdb.com/api/json/v1/1/random.php").then(function (response) {
+            response.json().then(function (data) {
+                createMealCards(data);
+            });
+        });
+    };
+};
 
-getMeals();
+getDefaultMeals();
 
 var createMealCards = function (data) {
-    console.log("here");
-
-    console.log(data);
 
     var container = document.getElementById("food-container");
 
@@ -235,6 +249,8 @@ var createMealCards = function (data) {
         var buttonEl = document.createElement("button");
         buttonEl.className = "self-start"
         innerDivEl.appendChild(buttonEl);
+        var mealId = meal.idMeal;
+        console.log(mealId);
 
         //add event listener buttonEl.addEventListener();
 
