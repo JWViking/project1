@@ -214,7 +214,7 @@ var createMealCards = function (data) {
 
         //create button
         var buttonEl = document.createElement("button");
-        buttonEl.className = "self-start"
+        buttonEl.className = "self-start";
         innerDivEl.appendChild(buttonEl);
 
         //add event listener buttonEl.addEventListener();
@@ -224,9 +224,7 @@ var createMealCards = function (data) {
         //    var heartEl = document.createElement("i");
         //    heartEl.className = "fa fa-heart-o";
         //    buttonEl.appendChild(heartEl);
-
     };
-
 };
 
 // Fetch drinks from thecocktaildb API
@@ -312,9 +310,9 @@ document.addEventListener('click', function(e) {
         console.log("submit drink cateorgy");
         // call function to return one category of food
 
-    } else if (e.target && e.target.id === 'name-drinks') {
-        console.log("name drinks");
-    } else if (e.target && e.target.id === 'all-food') {
+    } else if (e.target && e.target.id === 'ingredient-drinks') {
+        console.log("ingredient drinks");
+    } else if (e.target && e.target.id === 'area-food') {
         resetModal();
         getMeals();
         console.log("all food");
@@ -328,7 +326,7 @@ document.addEventListener('click', function(e) {
         console.log("submit food cateorgy");
         // call function to return one category of food
 
-    } else if (e.target && e.target.id === 'name-food') {
+    } else if (e.target && e.target.id === 'ingredient-food') {
         // call function to return one food item based on name
         console.log("name food");
     } else if (e.target && e.target.id === 'close-modal') {
