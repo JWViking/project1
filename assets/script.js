@@ -19,12 +19,29 @@
 // };
 
 var getMeals = function () {
-    fetch("https:www.themealdb.com/api/json/v1/1/search.php?f=a").then(function (response) {
+    fetch("https:www.themealdb.com/api/json/v1/1/filter.php?c=Seafood").then(function (response) {
         response.json().then(function (data) {
             createMealCards(data);
         });
     });
 };
+
+var getCategoryMeals = function () {
+    fetch("https:www.themealdb.com/api/json/v1/1/categories.php").then(function (response) {
+        response.json().then(function (data) {
+            createMealCards(data);
+        });
+    });
+};
+
+var getAreaMeals = function () {
+    fetch("https:www.themealdb.com/api/json/v1/1/filter.php?a=Canadian").then(function (response) {
+        response.json().then(function (data) {
+            createMealCards(data);
+        });
+    });
+};
+
 
 getMeals();
 
@@ -44,7 +61,7 @@ var createMealCards = function (data) {
 
         //create image element
         var imgEl = document.createElement("img");
-        imgEl.src = meal.strMealThumb //get help here!!!
+        imgEl.src = meal.strMealThumb
         divEl.appendChild(imgEl);
 
         //create inner div
@@ -54,7 +71,7 @@ var createMealCards = function (data) {
         //create inner div <p>
         //innerDivEl.innerHTML = "<p></p><button class='self-start'><i class='fa fa-heart-o></i></button>"
         var pEl = document.createElement("p");
-        pEl.innerHTML = meal.strMeal // get help here!!!
+        pEl.innerHTML = meal.strMeal
         innerDivEl.appendChild(pEl);
 
         //create button
