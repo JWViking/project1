@@ -20,7 +20,7 @@ var favRecipies = JSON.parse(localStorage.getItem("recipe-URL")) || [];
 $(heartRecipeEl).on("click",function(){
     var selectedRecipe = $(this).parent();
     var selectedImage = $(selectedRecipe).siblings("img");
-    // imgURL represents the 
+    // imgURL represents the link
     var imgUrl = selectedImage.attr('src');
 
     favRecipies.push(imgUrl);
@@ -30,15 +30,7 @@ $(heartRecipeEl).on("click",function(){
 
 })
 
-
-
-function getRecipes(){
-    
-    
-
-}
-
-function displayRecipes(){
+function displayFavorites(){
 
 
     foodContEl.innerHTML = "";
