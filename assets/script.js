@@ -1,5 +1,7 @@
 // autocomplete variables
 var foodCatNames = [];
+var foodIngNames = [];
+var foodAreaNames = [];
 var drinkCatNames = [];
 
 //modal variables
@@ -11,16 +13,17 @@ let drinkModalBtn = document.getElementById("drink-btn");
 var foodOptEl = document.getElementById('food-opt');
 var drinkOptEl = document.getElementById('drink-opt');
 var modalDescEl = document.getElementById('modal-desc');
-
 var foodCatContainerEl = document.getElementById('food-cat-container');
-var drinkCatContainerEl = document.getElementById('drink-cat-container');
-
 var foodCatInputEl = document.getElementById('food-cat-input');
+var foodIngContainerEl = document.getElementById('food-ing-container');
+var foodIngInputEl = document.getElementById('food-ing-input');
+var foodAreaContainerEl = document.getElementById('food-area-container');
+var foodAreaInputEl = document.getElementById('food-area-input');
+var drinkCatContainerEl = document.getElementById('drink-cat-container');
 var drinkCatInputEl = document.getElementById('drink-cat-input');
 
 
-
-var foodModalSearch = function() {
+var foodCatModalSearch = function() {
     foodOptEl.classList.add('hidden');
     foodCatContainerEl.classList.remove('hidden');
     console.log("food function");
@@ -37,6 +40,43 @@ var foodModalSearch = function() {
         });
     });
 }
+
+var foodIngModalSearch = function() {
+    foodOptEl.classList.add('hidden');
+    foodIngContainerEl.classList.remove('hidden');
+    console.log("food function");
+    //modalContainerEl.innerHTML = "";
+    var apiUrl = "https://www.themealdb.com/api/json/v1/1/list.php?i=list";
+    fetch(apiUrl).then(function(response){
+        response.json().then(function(data){
+            if (foodIngNames.length < 1){
+                for(var i=0; i < data.meals.length; i++){
+                    foodIngNames.push(data.meals[i].strIngredient);
+                }
+            }
+            console.log(foodIngNames);
+        });
+    });
+}
+
+var foodAreaModalSearch = function() {
+    foodOptEl.classList.add('hidden');
+    foodAreaContainerEl.classList.remove('hidden');
+    var apiUrl = "https://www.themealdb.com/api/json/v1/1/list.php?a=list";
+    fetch(apiUrl).then(function(response){
+        response.json().then(function(data){
+            console.log(data);
+            if (foodIngNames.length < 1){
+                for(var i=0; i < data.meals.length; i++){
+                    foodAreaNames.push(data.meals[i].strArea);
+                    console.log(data.meals[i].strArea);
+                }
+            }
+            console.log(foodAreaNames);
+        });
+    });
+}
+
 
 var drinkModalSearch = function() {
     drinkOptEl.classList.add('hidden');
@@ -62,6 +102,7 @@ var resetModal = function() {
     drinkOptEl.classList.add('hidden');
     modalDescEl.classList.remove('hidden');
     foodCatContainerEl.classList.add('hidden');
+    foodAreaContainerEl.classList.add('hidden');
     drinkCatContainerEl.classList.add('hidden');
 }
 
@@ -72,6 +113,18 @@ $(function() {
     $('#food-cat-input').autocomplete({
         minLength: 1,
         source: foodCatNames
+    });
+});
+$(function() {
+    $('#food-ing-input').autocomplete({
+        minLength: 1,
+        source: foodIngNames
+    });
+});
+$(function() {
+    $('#food-area-input').autocomplete({
+        minLength: 1,
+        source: foodAreaNames
     });
 });
 
@@ -184,27 +237,38 @@ var getLetterMeals = function () {
 };
 
 var getCategoryMeals = function () {
-    fetch("https:www.themealdb.com/api/json/v1/1/filter.php?c=Seafood").then(function (response) {
+    var category = foodCatInputEl.value;
+    console.log(foodCatInputEl.value);
+    fetch("https:www.themealdb.com/api/json/v1/1/filter.php?c=" + category).then(function (response) {
         response.json().then(function (data) {
             createMealCards(data);
         });
     });
+    foodContEl.innerHTML = "";
+    foodCatInputEl.value = "";
 };
 
 var getMainIngredientMeals = function () {
-    fetch("https:www.themealdb.com/api/json/v1/1/filter.php?i=chicken_breast").then(function (response) {
+    var ingredient = foodIngInputEl.value;
+    fetch("https:www.themealdb.com/api/json/v1/1/filter.php?i=" + ingredient).then(function (response) {
         response.json().then(function (data) {
             createMealCards(data);
         });
     });
- };
- 
+    foodContEl.innerHTML = "";
+    foodIngInputEl.value = "";
+};
+
 var getAreaMeals = function () {
-    fetch("https:www.themealdb.com/api/json/v1/1/filter.php?a=Canadian").then(function (response) {
+    var area = foodAreaInputEl.value;
+    console.log(area);
+    fetch("https:www.themealdb.com/api/json/v1/1/filter.php?a=" + area).then(function (response) {
         response.json().then(function (data) {
             createMealCards(data);
         });
     });
+    foodContEl.innerHTML = "";
+    foodAreaInputEl.value = "";
 };
 
 var getDefaultMeals = function () {
@@ -217,7 +281,7 @@ var getDefaultMeals = function () {
     };
 };
 
-getDefaultMeals();
+//getDefaultMeals();
 
 var createMealCards = function (data) {
 
@@ -335,40 +399,42 @@ document.addEventListener('click', function(e) {
         resetModal();
         getDrinks();
         console.log("all drinks");
-        //calll function to return all drinks
-
+        //Drink button functions
     } else if (e.target && e.target.id === 'cat-drinks') {
         console.log("cat drinks");
         drinkModalSearch();
     } else if (e.target && e.target.id === 'sub-drink-cat') {
         resetModal();
         console.log("submit drink cateorgy");
-        // call function to return one category of food
-
     } else if (e.target && e.target.id === 'ingredient-drinks') {
         console.log("ingredient drinks");
+        // food button functions
     } else if (e.target && e.target.id === 'area-food') {
-        resetModal();
-        getMeals();
+        foodAreaModalSearch();
         console.log("all food");
-        //call function to return all food
-
     } else if (e.target && e.target.id === 'cat-food') {
         console.log("cat food");
-        foodModalSearch();
+        foodCatModalSearch();
     } else if (e.target && e.target.id === 'sub-food-cat') {
         resetModal();
-        console.log("submit food cateorgy");
-        // call function to return one category of food
-
-    } else if (e.target && e.target.id === 'ingredient-food') {
+        getCategoryMeals();
+        console.log("submit food cateorgy");  
+    } else if (e.target && e.target.id === 'sub-food-ing') {
+        resetModal();
+        getMainIngredientMeals();
+        console.log("submit food cateorgy");  
+    } else if (e.target && e.target.id === 'sub-food-area') {
+        resetModal();
+        getAreaMeals();
+        console.log("submit food area");  
+    }else if (e.target && e.target.id === 'ingredient-food') {
         // call function to return one food item based on name
-        console.log("name food");
+        foodIngModalSearch();
+        console.log("ingredient food");
     } else if (e.target && e.target.id === 'close-modal') {
         console.log("close modal");
         resetModal();
-    }
-    
+    } 
 })
 
 //favoritesBtn.addEventListener("click", retrieveRecipes);
