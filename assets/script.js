@@ -175,18 +175,51 @@ function displayFavorites(){
 //     };
 // };
 
-var getMeals = function () {
-    fetch("https:www.themealdb.com/api/json/v1/1/search.php?f=a").then(function (response) {
+var getLetterMeals = function () {
+    fetch("https:www.themealdb.com/api/json/v1/1/search.php?f=b").then(function (response) {
         response.json().then(function (data) {
             createMealCards(data);
         });
     });
 };
 
-var createMealCards = function (data) {
-    console.log("here");
+var getCategoryMeals = function () {
+    fetch("https:www.themealdb.com/api/json/v1/1/filter.php?c=Seafood").then(function (response) {
+        response.json().then(function (data) {
+            createMealCards(data);
+        });
+    });
+};
 
-    console.log(data);
+var getMainIngredientMeals = function () {
+    fetch("https:www.themealdb.com/api/json/v1/1/filter.php?i=chicken_breast").then(function (response) {
+        response.json().then(function (data) {
+            createMealCards(data);
+        });
+    });
+ };
+ 
+var getAreaMeals = function () {
+    fetch("https:www.themealdb.com/api/json/v1/1/filter.php?a=Canadian").then(function (response) {
+        response.json().then(function (data) {
+            createMealCards(data);
+        });
+    });
+};
+
+var getDefaultMeals = function () {
+    for (let step = 0; step<10; step++) {
+        fetch("https:www.themealdb.com/api/json/v1/1/random.php").then(function (response) {
+            response.json().then(function (data) {
+                createMealCards(data);
+            });
+        });
+    };
+};
+
+getDefaultMeals();
+
+var createMealCards = function (data) {
 
     var container = document.getElementById("food-container");
 
@@ -199,7 +232,7 @@ var createMealCards = function (data) {
 
         //create image element
         var imgEl = document.createElement("img");
-        imgEl.src = meal.strMealThumb //get help here!!!
+        imgEl.src = meal.strMealThumb
         divEl.appendChild(imgEl);
 
         //create inner div
@@ -209,13 +242,15 @@ var createMealCards = function (data) {
         //create inner div <p>
         //innerDivEl.innerHTML = "<p></p><button class='self-start'><i class='fa fa-heart-o></i></button>"
         var pEl = document.createElement("p");
-        pEl.innerHTML = meal.strMeal // get help here!!!
+        pEl.innerHTML = meal.strMeal
         innerDivEl.appendChild(pEl);
 
         //create button
         var buttonEl = document.createElement("button");
         buttonEl.className = "self-start";
         innerDivEl.appendChild(buttonEl);
+        var mealId = meal.idMeal;
+        console.log(mealId);
 
         //add event listener buttonEl.addEventListener();
 
