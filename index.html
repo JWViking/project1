@@ -63,15 +63,14 @@
             </div>
             <!-- Food Option Buttons -->
             <div class="hidden items-center p-3" id="food-opt">
-                <button id="all-food" class="p-3 bg-green-500 text-white font-medium rounded-md w-full hover:bg-green-600">
-                    SHOW ALL MEALS
+                <button id="area-food" class="p-3 bg-green-500 text-white font-medium rounded-md w-full hover:bg-green-600">
+                    MEALS BY AREA
                 </button>
                 <button id="cat-food" class="mt-3 p-3 bg-green-500 text-white font-medium rounded-md w-full hover:bg-green-600">
                     MEALS BY CATEGORY
                 </button>
-                <!-- Hidden, doesnt do anything yet -->
-                <button id="name-food" class="hidden mt-3 p-3 bg-green-500 text-white font-medium rounded-md w-full hover:bg-green-600">
-                    MEALS BY NAME
+                <button id="ingredient-food" class="mt-3 p-3 bg-green-500 text-white font-medium rounded-md w-full hover:bg-green-600">
+                    MEALS BY Ingredient
                 </button>
             </div>
             <!-- Food Category Input -->
@@ -81,12 +80,21 @@
                     SUBMIT FOOD CAT
                 </button>
             </div>
-            <div class="hidden" id="drink-cat-container">
-                <input type="text" placeholder="Enter a drink category..." class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-nonew-full" id="drink-cat-input">
-                <button id="sub-drink-cat" class="mt-2 p-3 bg-blue-500 text-white font-medium rounded-md w-full hover:bg-blue-600">
-                    SUBMIT DRINK CAT
+            <!-- Food Ingredient Input -->
+            <div class="hidden" id="food-ing-container">
+                <input type="text" placeholder="Enter a food category..." class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-nonew-full" id="food-ing-input">
+                <button id="sub-food-ing" class="mt-2 p-3 bg-green-500 text-white font-medium rounded-md w-full hover:bg-green-600">
+                    SUBMIT FOOD INGREDIENT
                 </button>
             </div>
+            <!-- Food Area Input -->
+            <div class="hidden" id="food-area-container">
+                <input type="text" placeholder="Enter a food category..." class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-nonew-full" id="food-area-input">
+                <button id="sub-food-area" class="mt-2 p-3 bg-green-500 text-white font-medium rounded-md w-full hover:bg-green-600">
+                    SUBMIT FOOD AREA
+                </button>
+            </div>
+
             <!-- Drink Option Buttons -->
             <div class="hidden items-center px-4 py-3" id="drink-opt">
                 <button id="all-drinks" class="p-3 bg-blue-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-blue-600">
@@ -96,9 +104,16 @@
                     DRINKS BY CATEGORY
                 </button>
                 <!-- Hidden, doesnt do anything yet -->
-                <button id="name-drinks" class="hidden mt-3 p-3 bg-blue-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-blue-600">
-                    DRINKS BY NAME
+                <button id="ingredient-drinks" class="hidden mt-3 p-3 bg-blue-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-blue-600">
+                    DRINKS BY INGREDIENT
                 </button>
+
+                <div class="hidden" id="drink-cat-container">
+                    <input type="text" placeholder="Enter a drink category..." class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-nonew-full" id="drink-cat-input">
+                    <button id="sub-drink-cat" class="mt-2 p-3 bg-blue-500 text-white font-medium rounded-md w-full hover:bg-blue-600">
+                        SUBMIT DRINK CAT
+                    </button>
+                </div>
             </div>
         </div>
         </div>
@@ -111,7 +126,7 @@
 
     <!-- drink container, basically the same as the food container -->
     <!-- hidden class makes this section invsible, remove hidden class to see it -->
-    <section class="container" id="drink-container">
+    <section class="container hidden" id="drink-container">
         <!-- each of the 'card' div elements is a placeholder and can be deleted when fetch request is done -->
         <div class="card">
             <img src="https://www.thecocktaildb.com/images/media/drink/5noda61589575158.jpg">
