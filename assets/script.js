@@ -103,7 +103,9 @@ var resetModal = function() {
     modalDescEl.classList.remove('hidden');
     foodCatContainerEl.classList.add('hidden');
     foodAreaContainerEl.classList.add('hidden');
+    foodIngContainerEl.classList.add('hidden');
     drinkCatContainerEl.classList.add('hidden');
+    
 }
 
 
