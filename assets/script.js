@@ -1,14 +1,39 @@
-// Fetch drinks from thecocktaildb API
-var getDrinks = function () {
-    fetch("https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a").then(function (response) {
-        response.json().then(function (data) {
-            createDrinkCards(data);
-        });
+// Fetch drinks from thecocktaildb API filter by alc, category, ingred
+//var getDrinks = function () {
+ //   fetch("https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a").then(function (response) {
+ //       response.json().then(function (data) {
+  //          createDrinkCards(data);
+  //      });
+  //  });
+//};
+
+getCategoryDrinks = function () {
+    fetch("https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Cocktail").then(function (response) {
+         response.json().then(function (data) {
+        createDrinkCards(data);
+         });
     });
-};
+}
+// https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic
+getAlcoholDrinks = function () {
+    fetch("https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic").then(function (response) {
+         response.json().then(function (data) {
+        createDrinkCards(data);
+         });
+    });
+}
+// https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Vodka
+getIngredientDrinks = function () {
+    fetch("https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Gin").then(function (response) {
+         response.json().then(function (data) {
+        createDrinkCards(data);
+         });
+    });
+}
 
 // Fetch drink function
-getDrinks();
+//getDrinks
+getAlcoholDrinks(); getCategoryDrinks(); getIngredientDrinks();
 
 var createDrinkCards = function (data) {
     console.log("here");
