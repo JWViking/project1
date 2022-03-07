@@ -20,27 +20,26 @@
 
 <body>
     <!-- all header css is in tailwind classes -->
-    <header class="bg-yellow-50 w-full grid place-items-center sticky top-0">
+    <header class="bg-yellow-50 w-full grid place-items-center sticky top-0 z-30">
         <h1 class ="font-bold text-center text-xl"> Food app </h1>
         <!-- search modal button -->
-        <button class="bg-green-500 text-white rounded-md px-8 py-2 text-base font-medium hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300" id="open-btn">
-            Open Modal
-        </button>
+
 
         <nav class="flex justify-center w-full py-1">
-            <button class="w-3/12 mx-1 bg-red-900 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Meals</button>
-            <button class="w-3/12 mx-1 bg-red-900 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Drinks</button>
-            <button id="favs-btn" class="w-3/12 mx-1 bg-red-900 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Favorites</button>
+            <button class="w-3/12 mx-1 bg-red-900 hover:bg-red-600 text-white font-bold py-2 px-4 rounded" id="open-btn">
+                Search for Food or Drink
+            </button>
+            <button id="favs-btn" class="w-3/12 mx-1 bg-red-900 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Favorite Foods & Drinks</button>
         </nav>
     </header>
 
     <!-- Modal container -->
-    <div class="fixed hidden inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"
+    <div class="z-40 fixed hidden inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"
 	id="my-modal"> 
 
         <!--modal content-->
         <div
-        class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white"
+        class="z-50 relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white"
         >
         <div class="mt-3 text-center">
             <div class="flex justify-center static">
@@ -70,7 +69,7 @@
                     MEALS BY CATEGORY
                 </button>
                 <button id="ingredient-food" class="mt-3 p-3 bg-green-500 text-white font-medium rounded-md w-full hover:bg-green-600">
-                    MEALS BY Ingredient
+                    MEALS BY INGREDIENT
                 </button>
             </div>
             <!-- Food Category Input -->
@@ -142,6 +141,10 @@
                 <button class="self-start"><i class="fa fa-heart-o"></i></button>
             </div>
         </div>
+    </section>
+
+    <section class="container hidden" id="fav-container">
+
     </section>
 
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
