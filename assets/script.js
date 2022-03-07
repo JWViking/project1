@@ -1,5 +1,7 @@
 // autocomplete variables
 var foodCatNames = [];
+var foodIngNames = [];
+var foodAreaNames = [];
 var drinkCatNames = [];
 
 //modal variables
@@ -11,16 +13,20 @@ let drinkModalBtn = document.getElementById("drink-btn");
 var foodOptEl = document.getElementById('food-opt');
 var drinkOptEl = document.getElementById('drink-opt');
 var modalDescEl = document.getElementById('modal-desc');
-
 var foodCatContainerEl = document.getElementById('food-cat-container');
-var drinkCatContainerEl = document.getElementById('drink-cat-container');
-
 var foodCatInputEl = document.getElementById('food-cat-input');
+var foodIngContainerEl = document.getElementById('food-ing-container');
+var foodIngInputEl = document.getElementById('food-ing-input');
+var foodAreaContainerEl = document.getElementById('food-area-container');
+var foodAreaInputEl = document.getElementById('food-area-input');
+var drinkCatContainerEl = document.getElementById('drink-cat-container');
 var drinkCatInputEl = document.getElementById('drink-cat-input');
+var favContainerEl = document.getElementById('fav-container');
+
+var drinkContainerEl = document.getElementById("drink-container");
 
 
-
-var foodModalSearch = function() {
+var foodCatModalSearch = function() {
     foodOptEl.classList.add('hidden');
     foodCatContainerEl.classList.remove('hidden');
     console.log("food function");
@@ -37,6 +43,43 @@ var foodModalSearch = function() {
         });
     });
 }
+
+var foodIngModalSearch = function() {
+    foodOptEl.classList.add('hidden');
+    foodIngContainerEl.classList.remove('hidden');
+    console.log("food function");
+    //modalContainerEl.innerHTML = "";
+    var apiUrl = "https://www.themealdb.com/api/json/v1/1/list.php?i=list";
+    fetch(apiUrl).then(function(response){
+        response.json().then(function(data){
+            if (foodIngNames.length < 1){
+                for(var i=0; i < data.meals.length; i++){
+                    foodIngNames.push(data.meals[i].strIngredient);
+                }
+            }
+            console.log(foodIngNames);
+        });
+    });
+}
+
+var foodAreaModalSearch = function() {
+    foodOptEl.classList.add('hidden');
+    foodAreaContainerEl.classList.remove('hidden');
+    var apiUrl = "https://www.themealdb.com/api/json/v1/1/list.php?a=list";
+    fetch(apiUrl).then(function(response){
+        response.json().then(function(data){
+            console.log(data);
+            if (foodIngNames.length < 1){
+                for(var i=0; i < data.meals.length; i++){
+                    foodAreaNames.push(data.meals[i].strArea);
+                    console.log(data.meals[i].strArea);
+                }
+            }
+            console.log(foodAreaNames);
+        });
+    });
+}
+
 
 var drinkModalSearch = function() {
     drinkOptEl.classList.add('hidden');
@@ -62,7 +105,10 @@ var resetModal = function() {
     drinkOptEl.classList.add('hidden');
     modalDescEl.classList.remove('hidden');
     foodCatContainerEl.classList.add('hidden');
+    foodAreaContainerEl.classList.add('hidden');
+    foodIngContainerEl.classList.add('hidden');
     drinkCatContainerEl.classList.add('hidden');
+    
 }
 
 
@@ -72,6 +118,18 @@ $(function() {
     $('#food-cat-input').autocomplete({
         minLength: 1,
         source: foodCatNames
+    });
+});
+$(function() {
+    $('#food-ing-input').autocomplete({
+        minLength: 1,
+        source: foodIngNames
+    });
+});
+$(function() {
+    $('#food-area-input').autocomplete({
+        minLength: 1,
+        source: foodAreaNames
     });
 });
 
@@ -85,7 +143,7 @@ $(function() {
 
 
 //Declaring name of favorites button
-var favoritesBtn = document.getElementById("favs-btn")
+var favoritesBtn = document.getElementById("favs-btn");
 // Declaring food container name
 var foodContEl = document.getElementById("food-container");
 // Laying out each card for testing purposes
@@ -116,82 +174,74 @@ $(heartRecipeEl).on("click",function(){
 
 })
 
-function displayFavorites(){
 
-
-    foodContEl.innerHTML = "";
-
-    for(let i=0; i<favRecipies.length; i++){
-        // var recipeimage = ; will be finished after data is passed in
-        // var recipeTitle = ;       
-        
-        var favCard = document.createElement("div");
-        favCard.setAttribute("class", "card");
-
-        var infoHouse = document.createElement('div');
-
-        var recipeimageEl = document.createElement('img');
-        recipeimageEl.setAttribute("src", recipeimage);
-        
-        var recipeTitleEl = document.createElement('p')
-        recipeTitleEl.textContent = recipeTitle;
-
-        var recipeButtonEl = document.createElement('button')
-        recipeButtonEl.innerHTML = ("class='self-start'><i class='fa fa-heart-o'></i>");
-
-        
-        
-        favCard.appendChild(recipeimageEl);
-        infoHouse.appendChild(recipeTitleEl);
-        infoHouse.appendChild(recipeButtonEl);
-        favCard.appendChild(infoHouse);
-
-        foodContEl.appendChild(favCard);
-
-
-
-    }
-};
-
-
-
-
-// var getMeals = function () {
-//     var searchAll = "abcdefghijklmnopqrstuvwxyz"
-
-//     for(i=0; i<searchAll.length; i++) {
-//         console.log(searchAll.charAt(i));
-//         var key = searchAll.charAt(i);
-//         var url = "https:www.themealdb.com/api/json/v1/1/search.php?f=" + key;
-//         console.log("key",key);
-//         console.log(url);
-
-
-//         fetch("https:www.themealdb.com/api/json/v1/1/search.php?f=" + key).then (function(response) {
-//             response.json().then(function(data) {
-//                 createMealCards(data);
-//             });
-//         });
-//     };
-// };
-
-var getMeals = function () {
-    fetch("https:www.themealdb.com/api/json/v1/1/search.php?f=a").then(function (response) {
+var getLetterMeals = function () {
+    fetch("https:www.themealdb.com/api/json/v1/1/search.php?f=b").then(function (response) {
         response.json().then(function (data) {
             createMealCards(data);
         });
     });
 };
 
-var createMealCards = function (data) {
-    console.log("here");
+var getCategoryMeals = function () {
+    var category = foodCatInputEl.value;
+    console.log(foodCatInputEl.value);
+    fetch("https:www.themealdb.com/api/json/v1/1/filter.php?c=" + category).then(function (response) {
+        response.json().then(function (data) {
+            createMealCards(data);
+        });
+    });
+    foodContEl.innerHTML = "";
+    foodCatInputEl.value = "";
+    favContainerEl.classList.add('hidden');
+};
 
-    console.log(data);
+var getMainIngredientMeals = function () {
+    var ingredient = foodIngInputEl.value;
+    fetch("https:www.themealdb.com/api/json/v1/1/filter.php?i=" + ingredient).then(function (response) {
+        response.json().then(function (data) {
+            createMealCards(data);
+        });
+    });
+    foodContEl.innerHTML = "";
+    foodIngInputEl.value = "";
+    favContainerEl.classList.add('hidden');
+};
+
+var getAreaMeals = function () {
+    var area = foodAreaInputEl.value;
+    console.log(area);
+    fetch("https:www.themealdb.com/api/json/v1/1/filter.php?a=" + area).then(function (response) {
+        response.json().then(function (data) {
+            createMealCards(data);
+        });
+    });
+    foodContEl.innerHTML = "";
+    foodAreaInputEl.value = "";
+    favContainerEl.classList.add('hidden');
+};
+
+var getDefaultMeals = function () {
+    for (let step = 0; step<10; step++) {
+        fetch("https:www.themealdb.com/api/json/v1/1/random.php").then(function (response) {
+            response.json().then(function (data) {
+                createMealCards(data);
+            });
+        });
+    };
+    favContainerEl.classList.add('hidden');
+};
+
+
+var createMealCards = function (data) {
+    foodContEl.classList.remove('hidden');
+    favContainerEl.classList.add('hidden');
+    drinkContainerEl.classList.add('hidden');
 
     var container = document.getElementById("food-container");
 
     for (const meal of data.meals) {
-        console.log(meal);
+        //console.log(meal);
         //create card div
         var divEl = document.createElement("div");
         divEl.className = "card";
@@ -199,7 +249,7 @@ var createMealCards = function (data) {
 
         //create image element
         var imgEl = document.createElement("img");
-        imgEl.src = meal.strMealThumb //get help here!!!
+        imgEl.src = meal.strMealThumb
         divEl.appendChild(imgEl);
 
         //create inner div
@@ -207,28 +257,94 @@ var createMealCards = function (data) {
         divEl.appendChild(innerDivEl);
 
         //create inner div <p>
-        //innerDivEl.innerHTML = "<p></p><button class='self-start'><i class='fa fa-heart-o></i></button>"
         var pEl = document.createElement("p");
-        pEl.innerHTML = meal.strMeal // get help here!!!
+        pEl.innerHTML = meal.strMeal
         innerDivEl.appendChild(pEl);
 
         //create button
         var buttonEl = document.createElement("button");
-        buttonEl.className = "self-start"
+        buttonEl.className = "self-start";
+        
         innerDivEl.appendChild(buttonEl);
 
-        //add event listener buttonEl.addEventListener();
-
-        //create heart icon
-        buttonEl.innerHTML = "<i class='fa-solid fa-heart'></i>";
-        //    var heartEl = document.createElement("i");
-        //    heartEl.className = "fa fa-heart-o";
-        //    buttonEl.appendChild(heartEl);
-
+        var mealId = meal.idMeal;
+        console.log(mealId)
+        buttonEl.setAttribute('id', 'fav-button');
+        buttonEl.setAttribute('data-id', mealId);
+        buttonEl.classList.add('w-1/2', 'h-14', 'm-1', 'bg-red-900', 'hover:bg-red-600', 'text-white', 'text-sm', 'font-bold', 'py-2', 'px-4', 'rounded');
+        buttonEl.textContent = 'Add to Favorites';
     };
-
 };
 
+var favIdStorage = [];
+
+document.addEventListener('click',function(e){
+    if(e.target && e.target.id== 'fav-button'){
+        var element = e.target;
+        var favId = element.getAttribute('data-id');
+        favIdStorage.push(favId);
+        displayFavorites(favId);
+        localStorage.setItem("favorites", JSON.stringify(favIdStorage));
+        console.log(localStorage);
+    }
+});
+
+
+
+var displayFavorites = function(favId) {
+    console.log(favId);
+    var apiUrl = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + favId;
+    fetch(apiUrl).then(function(response) {
+        response.json().then(function(data) {
+            var divEl = document.createElement("div");
+            divEl.className = "fav-card";
+            favContainerEl.appendChild(divEl);
+
+            var mealPic = document.createElement("img");
+            mealPic.src = data.meals[0].strMealThumb;
+            divEl.appendChild(mealPic);
+
+            var innerDivEl = document.createElement('div');
+            divEl.appendChild(innerDivEl);
+
+            var mealName = document.createElement('h1');
+            mealName.textContent = data.meals[0].strMeal;
+            innerDivEl.appendChild(mealName);
+
+            var ingList = document.createElement('ul');
+            innerDivEl.appendChild(ingList);
+
+            var listItem = document.createElement('li');
+            listItem.textContent = data.meals[0].strIngredient1 + ": " + data.meals[0].strMeasure1;
+            ingList.appendChild(listItem);
+
+            var instructions = document.createElement('p');
+            instructions.textContent = data.meals[0].strInstructions;
+            innerDivEl.appendChild(instructions);
+        });
+    });
+}
+
+var displayStorage = function() {
+    var getFavorites = JSON.parse(localStorage.getItem("favorites"));
+
+
+    if (getFavorites) {
+        console.log(getFavorites.length);
+        for(var i=0; i< getFavorites.length; i++){
+            displayFavorites(getFavorites[i]);
+        }
+    }
+}
+displayStorage();
+
+////
+//
+//
+//
+//
+//
+//
 // Fetch drinks from thecocktaildb API
 var getDrinks = function () {
     fetch("https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a").then(function (response) {
@@ -302,40 +418,37 @@ document.addEventListener('click', function(e) {
         resetModal();
         getDrinks();
         console.log("all drinks");
-        //calll function to return all drinks
-
+        //Drink button functions
     } else if (e.target && e.target.id === 'cat-drinks') {
         console.log("cat drinks");
         drinkModalSearch();
     } else if (e.target && e.target.id === 'sub-drink-cat') {
         resetModal();
         console.log("submit drink cateorgy");
-        // call function to return one category of food
-
-    } else if (e.target && e.target.id === 'name-drinks') {
-        console.log("name drinks");
-    } else if (e.target && e.target.id === 'all-food') {
-        resetModal();
-        getMeals();
-        console.log("all food");
-        //call function to return all food
-
+    } else if (e.target && e.target.id === 'ingredient-drinks') {
+        console.log("ingredient drinks");
+        // food button functions
+    } else if (e.target && e.target.id === 'area-food') {
+        foodAreaModalSearch();
     } else if (e.target && e.target.id === 'cat-food') {
-        console.log("cat food");
-        foodModalSearch();
+        foodCatModalSearch();
     } else if (e.target && e.target.id === 'sub-food-cat') {
         resetModal();
-        console.log("submit food cateorgy");
-        // call function to return one category of food
-
-    } else if (e.target && e.target.id === 'name-food') {
-        // call function to return one food item based on name
-        console.log("name food");
-    } else if (e.target && e.target.id === 'close-modal') {
-        console.log("close modal");
+        getCategoryMeals();
+    } else if (e.target && e.target.id === 'sub-food-ing') {
         resetModal();
-    }
-    
+        getMainIngredientMeals();
+    } else if (e.target && e.target.id === 'sub-food-area') {
+        resetModal();
+        getAreaMeals();
+    }else if (e.target && e.target.id === 'ingredient-food') {
+        // call function to return one food item based on name
+        foodIngModalSearch();
+    } else if (e.target && e.target.id === 'close-modal') {
+        resetModal();
+    } else if (e.target && e.target.id === 'favs-btn') {
+        foodContEl.classList.add('hidden');
+        drinkContainerEl.classList.add('hidden');
+        favContainerEl.classList.remove('hidden');
+    } 
 })
-
-//favoritesBtn.addEventListener("click", retrieveRecipes);
