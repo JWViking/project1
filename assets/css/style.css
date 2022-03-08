@@ -3,6 +3,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    
 }
 
 /* the container that holds all of the food cards */
@@ -11,6 +12,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    min-height: 90vh;
 }
 
 /* this is the card container */
@@ -38,6 +40,61 @@ body {
 }
 .card div i {
     width: 10%;
+}
+
+/* classes for favorites page */
+.fav-card {
+    margin: 10px 5px;
+    border-radius: 15px;
+    width: 100%;
+    background-color:antiquewhite;
+    position: relative;
+}
+.card {
+    margin: 10px 5px;
+    border-radius: 15px;
+    width: 45%;
+    background-color:antiquewhite;
+}
+
+/* these are the children elements inside the card container */
+.fav-card img {
+    height: 20em;
+    width: 100%;
+    border-radius: 15px 15px 0 0;
+    object-fit: cover;
+}
+.fav-card div {
+    display: flex;
+}
+.fav-card h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+    text-shadow: 3px 3px 5px black;
+    text-transform: uppercase;
+    position: absolute;
+    text-align: center;
+    top: 10%;
+    left: 5%
+}
+.fav-card div p {
+    width: 65%;
+    padding: 5px 12px;
+    font-weight: 650;
+    float: right;
+}
+.fav-card div ul {
+    width: 30%;
+}
+
+/* footer style */
+footer {
+    display:flex;
+    align-items: left;
+    width: 100%;
+    margin-top: auto;
+    padding-left: 5vh;
 }
 
 /* class to hide the display, add this class to whatever you want to remove from the display */
