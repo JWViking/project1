@@ -3,6 +3,7 @@ var foodCatNames = [];
 var foodIngNames = [];
 var foodAreaNames = [];
 var drinkCatNames = [];
+var drinkIngNames = [];
 
 //modal variables
 let modal = document.getElementById("my-modal");
@@ -20,7 +21,11 @@ var foodIngInputEl = document.getElementById('food-ing-input');
 var foodAreaContainerEl = document.getElementById('food-area-container');
 var foodAreaInputEl = document.getElementById('food-area-input');
 var drinkCatContainerEl = document.getElementById('drink-cat-container');
+var drinkIngContainerEl = document.getElementById('drink-ing-container');
+
+var alcBtn = document.getElementById('alc');
 var drinkCatInputEl = document.getElementById('drink-cat-input');
+var drinkIngInputEl = document.getElementById('drink-ing-input');
 var favContainerEl = document.getElementById('fav-container');
 
 var drinkContainerEl = document.getElementById("drink-container");
@@ -81,10 +86,9 @@ var foodAreaModalSearch = function() {
 }
 
 
-var drinkModalSearch = function() {
+var drinkCatModalSearch = function() {
     drinkOptEl.classList.add('hidden');
     drinkCatContainerEl.classList.remove('hidden');
-    console.log("drink function");
     //modalContainerEl.innerHTML = "";
     var apiUrl = "https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list";
     fetch(apiUrl).then(function(response){
@@ -93,6 +97,23 @@ var drinkModalSearch = function() {
             if (drinkCatNames.length < 1){
                 for(var i=0; i < data.drinks.length; i++){
                     drinkCatNames.push(data.drinks[i].strCategory);
+                }
+            }
+        });
+    });
+}
+
+var drinkIngModalSearch = function() {
+    drinkOptEl.classList.add('hidden');
+    drinkIngContainerEl.classList.remove('hidden');
+    //modalContainerEl.innerHTML = "";
+    var apiUrl = "https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list";
+    fetch(apiUrl).then(function(response){
+        response.json().then(function(data){
+            
+            if (drinkCatNames.length < 1){
+                for(var i=0; i < data.drinks.length; i++){
+                    drinkIngNames.push(data.drinks[i].strIngredient1);
                 }
             }
         });
@@ -108,6 +129,8 @@ var resetModal = function() {
     foodAreaContainerEl.classList.add('hidden');
     foodIngContainerEl.classList.add('hidden');
     drinkCatContainerEl.classList.add('hidden');
+    drinkIngContainerEl.classList.add('hidden');
+    alcBtn.classList.add('hidden');
     
 }
 
@@ -137,6 +160,13 @@ $(function() {
     $('#drink-cat-input').autocomplete({
         minLength: 1,
         source: drinkCatNames
+    });
+});
+
+$(function() {
+    $('#drink-ing-input').autocomplete({
+        minLength: 1,
+        source: drinkIngNames
     });
 });
 
@@ -269,17 +299,95 @@ var createMealCards = function (data) {
 
         var mealId = meal.idMeal;
         console.log(mealId)
-        buttonEl.setAttribute('id', 'fav-button');
+        buttonEl.setAttribute('id', 'fav-food-button');
         buttonEl.setAttribute('data-id', mealId);
         buttonEl.classList.add('w-1/2', 'h-14', 'm-1', 'bg-red-900', 'hover:bg-red-600', 'text-white', 'text-sm', 'font-bold', 'py-2', 'px-4', 'rounded');
         buttonEl.textContent = 'Add to Favorites';
     };
 };
 
+
+
+getCategoryDrinks = function () {
+    var category = drinkCatInputEl.value;
+    fetch("https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=" + category).then(function (response) {
+        response.json().then(function (data) {
+        createDrinkCards(data);
+        });
+    });
+    drinkCatInputEl.value = "";
+}
+// https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic
+getAlcoholDrinks = function (alc) {
+    fetch("https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=" + alc).then(function (response) {
+        response.json().then(function (data) {
+        createDrinkCards(data);
+        });
+    });
+}
+// https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Vodka
+getIngredientDrinks = function () {
+    var ingredient = drinkIngInputEl.value;
+    fetch("https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=" + ingredient).then(function (response) {
+        response.json().then(function (data) {
+        createDrinkCards(data);
+        });
+    });
+    drinkIngInputEl.value = '';
+}
+
+
+var createDrinkCards = function (data) {
+    
+    foodContEl.classList.add('hidden');
+    favContainerEl.classList.add('hidden');
+    drinkContainerEl.classList.remove('hidden');
+
+    var container = document.getElementById("drink-container");
+    container.innerHTML = '';
+
+    for (const drink of data.drinks) {
+        console.log(drink);
+        //create card div
+        var divEl = document.createElement("div");
+        divEl.className = "card";
+        container.appendChild(divEl);
+
+        //create image element
+        var imgEl = document.createElement("img");
+        imgEl.src = drink.strDrinkThumb //get help here!!!
+        divEl.appendChild(imgEl);
+
+        //create inner div
+        var innerDivEl = document.createElement("div");
+        divEl.appendChild(innerDivEl);
+
+        //create inner div <p>
+        var pEl = document.createElement("p");
+        pEl.innerHTML = drink.strDrink 
+        innerDivEl.appendChild(pEl);
+
+        //create button
+        var buttonEl = document.createElement("button");
+        buttonEl.className = "self-start";
+        
+        innerDivEl.appendChild(buttonEl);
+
+        var mealId = meal.idMeal;
+        console.log(mealId)
+        buttonEl.setAttribute('id', 'fav-drink-button');
+        buttonEl.setAttribute('data-id', mealId);
+        buttonEl.classList.add('w-1/2', 'h-14', 'm-1', 'bg-red-900', 'hover:bg-red-600', 'text-white', 'text-sm', 'font-bold', 'py-2', 'px-4', 'rounded');
+        buttonEl.textContent = 'Add to Favorites';
+    };
+
+};
+
+
 var favIdStorage = [];
 
 document.addEventListener('click',function(e){
-    if(e.target && e.target.id== 'fav-button'){
+    if(e.target && e.target.id== 'fav-food-button'){
         var element = e.target;
         var favId = element.getAttribute('data-id');
         favIdStorage.push(favId);
@@ -338,61 +446,6 @@ var displayStorage = function() {
 }
 displayStorage();
 
-////
-//
-//
-//
-//
-//
-//
-// Fetch drinks from thecocktaildb API
-var getDrinks = function () {
-    fetch("https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a").then(function (response) {
-        response.json().then(function (data) {
-            createDrinkCards(data);
-        });
-    });
-};
-
-// Fetch drink function
-//getDrinks();
-
-var createDrinkCards = function (data) {
-    console.log("here");
-
-    console.log(data);
-
-    var container = document.getElementById("drink-container");
-
-    for (const drink of data.drinks) {
-        console.log(drink);
-        //create card div
-        var divEl = document.createElement("div");
-        divEl.className = "card";
-        container.appendChild(divEl);
-
-        //create image element
-        var imgEl = document.createElement("img");
-        imgEl.src = drink.strDrinkThumb //get help here!!!
-        divEl.appendChild(imgEl);
-
-        //create inner div
-        var innerDivEl = document.createElement("div");
-        divEl.appendChild(innerDivEl);
-
-        //create inner div <p>
-        var pEl = document.createElement("p");
-        pEl.innerHTML = drink.strDrink 
-        innerDivEl.appendChild(pEl);
-
-        //create button
-        var buttonEl = document.createElement("button");
-        buttonEl.className = "self-start"
-        innerDivEl.appendChild(buttonEl);
-    };
-
-};
-
 
 // We want the modal to open when the Open button is clicked
 openModalBtn.onclick = function() {
@@ -420,14 +473,32 @@ document.addEventListener('click', function(e) {
         console.log("all drinks");
         //Drink button functions
     } else if (e.target && e.target.id === 'cat-drinks') {
+        drinkCatContainerEl.classList.remove('hidden');
+        drinkOptEl.classList.add('hidden');
         console.log("cat drinks");
-        drinkModalSearch();
+        drinkCatModalSearch();
     } else if (e.target && e.target.id === 'sub-drink-cat') {
+        getCategoryDrinks();
         resetModal();
         console.log("submit drink cateorgy");
-    } else if (e.target && e.target.id === 'ingredient-drinks') {
-        console.log("ingredient drinks");
-        // food button functions
+    }else if (e.target && e.target.id === 'ingredient-drinks') {
+        drinkIngContainerEl.classList.remove('hidden');
+        drinkOptEl.classList.add('hidden');
+        drinkIngModalSearch();
+    }  else if (e.target && e.target.id === 'sub-drink-ing') {
+        getIngredientDrinks();
+        resetModal();
+    } else if (e.target && e.target.id === 'alc-drinks') {
+        drinkOptEl.classList.add('hidden');
+        alcBtn.classList.remove('hidden');
+    } else if (e.target && e.target.id === 'alcoholic') {
+        var alc = "Alcoholic"
+        getAlcoholDrinks(alc);
+        resetModal();
+    } else if (e.target && e.target.id === 'non-alc') {
+        var alc = "Non_Alcoholic"
+        getAlcoholDrinks(alc);
+        resetModal();
     } else if (e.target && e.target.id === 'area-food') {
         foodAreaModalSearch();
     } else if (e.target && e.target.id === 'cat-food') {
