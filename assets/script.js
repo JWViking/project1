@@ -25,6 +25,8 @@ var favContainerEl = document.getElementById('fav-container');
 
 var drinkContainerEl = document.getElementById("drink-container");
 
+getDefaultMeals ();
+
 
 var foodCatModalSearch = function() {
     foodOptEl.classList.add('hidden');
@@ -173,6 +175,7 @@ $(heartRecipeEl).on("click",function(){
     console.log(imgUrl);
 
 })
+
 
 
 var getLetterMeals = function () {

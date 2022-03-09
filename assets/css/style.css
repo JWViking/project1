@@ -3,6 +3,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    
 }
 
 /* the container that holds all of the food cards */
@@ -11,6 +12,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    min-height: 90vh;
 }
 
 /* this is the card container */
@@ -84,6 +86,15 @@ body {
 }
 .fav-card div ul {
     width: 30%;
+}
+
+/* footer style */
+footer {
+    display:flex;
+    align-items: left;
+    width: 100%;
+    margin-top: auto;
+    padding-left: 5vh;
 }
 
 /* class to hide the display, add this class to whatever you want to remove from the display */
