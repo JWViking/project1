@@ -408,11 +408,11 @@ var displayFavorites = function(favId) {
             var ingList = document.createElement('ul');
             innerDivEl.appendChild(ingList);
 
-
+            for(var i=0; i < 20; i++){
                 var listItem = document.createElement('li');
-                listItem.textContent = data.meals[0].strIngredient+i + ": " + data.meals[0].strMeasure1;
+                listItem.textContent = data.meals[0].strIngredient1 + ": " + data.meals[0].strMeasure1;
                 ingList.appendChild(listItem);
-            
+            }
 
             var instructions = document.createElement('p');
             instructions.textContent = data.meals[0].strInstructions;
