@@ -5,6 +5,10 @@ body {
     justify-content: center;
     
 }
+a{
+    padding: 5px 10px;
+    font-size: 20px;
+}
 
 /* the container that holds all of the food cards */
 .container {

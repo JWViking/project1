@@ -359,13 +359,9 @@ window.addEventListener('click', (e)=>{
         favDrinkIdStorage.push(drinkId);
         displayFavoriteDrinks(drinkId);
         localStorage.setItem("favorite-drinks", JSON.stringify(favDrinkIdStorage));
-        console.log("I clicked it");
     }
 });
 
-document.addEventListener('click', (e)=>{
-    console.log(e)
-});
 
 var displayFavorites = function(favId) {
     var apiUrl = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + favId;
@@ -385,9 +381,6 @@ var displayFavorites = function(favId) {
             var mealName = document.createElement('h1');
             mealName.textContent = data.meals[0].strMeal;
             innerDivEl.appendChild(mealName);
-
-            var ingList = document.createElement('ul');
-            innerDivEl.appendChild(ingList);
 
             var seeRecipe = document.createElement("a");
             seeRecipe.textContent = "Go to Recipe";
@@ -418,11 +411,9 @@ var displayFavoriteDrinks = function(drinkId) {
             drinkName.textContent = data.drinks[0].strDrink;
             innerDivEl.appendChild(drinkName);
 
-            var ingList = document.createElement('ul');
-            innerDivEl.appendChild(ingList);
             var seeRecipe = document.createElement("a");
             seeRecipe.textContent = "Go to Recipe";
-            seeRecipe.classList = "text-center";
+            seeRecipe.classList = "object-center";
             seeRecipe.setAttribute("href", "./assets/drinkrecipe.html?=" + drinkId);
             seeRecipe.setAttribute("target", "_blank");
             innerDivEl.appendChild(seeRecipe);

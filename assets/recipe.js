@@ -41,7 +41,7 @@ function displayRecipe(data){
     var foodImg = document.createElement("img");
     foodImg.setAttribute("src", data.meals[0].strMealThumb);
 
-    var ingredientsUl = document.createElement("ul")
+    var ingredientsUl = document.createElement("ul");
 
     
     var ingredientsLi1 = document.createElement('li');
@@ -80,7 +80,7 @@ function displayRecipe(data){
     ingredientsUl.appendChild(ingredientsLi4);
     ingredientsUl.appendChild(ingredientsLi5);
     ingredientsUl.appendChild(ingredientsLi6);
-    ingredientsUl.appendChild(ingredientsLi6);
+    ingredientsUl.appendChild(ingredientsLi7);
     ingredientsUl.appendChild(ingredientsLi8);
     ingredientsUl.appendChild(ingredientsLi9);
     ingredientsUl.appendChild(ingredientsLi10);
