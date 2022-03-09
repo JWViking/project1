@@ -207,7 +207,7 @@ $(heartRecipeEl).on("click",function(){
 
 
 var getLetterMeals = function () {
-    fetch("https:www.themealdb.com/api/json/v1/1/search.php?f=b").then(function (response) {
+    fetch("https://www.themealdb.com/api/json/v1/1/search.php?f=b").then(function (response) {
         response.json().then(function (data) {
             createMealCards(data);
         });
@@ -217,7 +217,7 @@ var getLetterMeals = function () {
 var getCategoryMeals = function () {
     var category = foodCatInputEl.value;
     console.log(foodCatInputEl.value);
-    fetch("https:www.themealdb.com/api/json/v1/1/filter.php?c=" + category).then(function (response) {
+    fetch("https://www.themealdb.com/api/json/v1/1/filter.php?c=" + category).then(function (response) {
         response.json().then(function (data) {
             createMealCards(data);
         });
@@ -229,7 +229,7 @@ var getCategoryMeals = function () {
 
 var getMainIngredientMeals = function () {
     var ingredient = foodIngInputEl.value;
-    fetch("https:www.themealdb.com/api/json/v1/1/filter.php?i=" + ingredient).then(function (response) {
+    fetch("https://www.themealdb.com/api/json/v1/1/filter.php?i=" + ingredient).then(function (response) {
         response.json().then(function (data) {
             createMealCards(data);
         });
@@ -242,7 +242,7 @@ var getMainIngredientMeals = function () {
 var getAreaMeals = function () {
     var area = foodAreaInputEl.value;
     console.log(area);
-    fetch("https:www.themealdb.com/api/json/v1/1/filter.php?a=" + area).then(function (response) {
+    fetch("https://www.themealdb.com/api/json/v1/1/filter.php?a=" + area).then(function (response) {
         response.json().then(function (data) {
             createMealCards(data);
         });
@@ -254,7 +254,7 @@ var getAreaMeals = function () {
 
 var getDefaultMeals = function () {
     for (let step = 0; step<10; step++) {
-        fetch("https:www.themealdb.com/api/json/v1/1/random.php").then(function (response) {
+        fetch("https://www.themealdb.com/api/json/v1/1/random.php").then(function (response) {
             response.json().then(function (data) {
                 createMealCards(data);
             });
