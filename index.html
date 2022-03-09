@@ -96,23 +96,38 @@
 
             <!-- Drink Option Buttons -->
             <div class="hidden items-center px-4 py-3" id="drink-opt">
-                <button id="all-drinks" class="p-3 bg-blue-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-blue-600">
-                    SHOW ALL DRINKS
+                <button id="alc-drinks" class="p-3 bg-blue-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-blue-600">
+                    ALCOHOL VS NO ALCOHOL
                 </button>
                 <button id="cat-drinks" class="mt-3 p-3 bg-blue-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-blue-600">
                     DRINKS BY CATEGORY
                 </button>
-                <!-- Hidden, doesnt do anything yet -->
-                <button id="ingredient-drinks" class="hidden mt-3 p-3 bg-blue-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-blue-600">
+
+                <button id="ingredient-drinks" class="mt-3 p-3 bg-blue-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-blue-600">
                     DRINKS BY INGREDIENT
                 </button>
-
-                <div class="hidden" id="drink-cat-container">
-                    <input type="text" placeholder="Enter a drink category..." class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-nonew-full" id="drink-cat-input">
-                    <button id="sub-drink-cat" class="mt-2 p-3 bg-blue-500 text-white font-medium rounded-md w-full hover:bg-blue-600">
-                        SUBMIT DRINK CAT
-                    </button>
-                </div>
+            </div>
+            <!-- connect these buttons to the corresponding function -->
+            <div class="hidden" id="drink-cat-container">
+                <input type="text" placeholder="Enter a drink category..." class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-nonew-full" id="drink-cat-input">
+                <button id="sub-drink-cat" class="mt-2 p-3 bg-blue-500 text-white font-medium rounded-md w-full hover:bg-blue-600">
+                    SUBMIT DRINK CAT
+                </button>
+            </div>
+                            
+            <div class="hidden" id="drink-ing-container">
+                <input type="text" placeholder="Enter a drink Ingredient..." class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-nonew-full" id="drink-ing-input">
+                <button id="sub-drink-ing" class="mt-2 p-3 bg-blue-500 text-white font-medium rounded-md w-full hover:bg-blue-600">
+                    SUBMIT DRINK INGREDIENT
+                </button>
+            </div>
+            <div class="hidden" id="alc">
+                <button id="alcoholic" class="mt-3 p-3 bg-blue-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-blue-600">
+                    ALCOHOLIC
+                </button>
+                <button id="non-alc" class="mt-3 p-3 bg-blue-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-blue-600">
+                    NON-ALCOHOLIC
+                </button>
             </div>
         </div>
         </div>
@@ -120,32 +135,20 @@
 
     <!-- food container, all css for this section is in the 'style.css' -->
     <section class="container" id="food-container">
-        
+    
     </section>
 
     <!-- drink container, basically the same as the food container -->
-    <!-- hidden class makes this section invsible, remove hidden class to see it -->
-    <section class="container hidden" id="drink-container">
-        <!-- each of the 'card' div elements is a placeholder and can be deleted when fetch request is done -->
-        <div class="card">
-            <img src="https://www.thecocktaildb.com/images/media/drink/5noda61589575158.jpg">
-            <div>
-                <p>Margarita</p>
-                <button class="self-start"><i class="fa fa-heart-o"></i></button>
-            </div>
-        </div>
-        <div class="card">
-            <img src="https://www.thecocktaildb.com/images/media/drink/yvvwys1461867858.jpg">
-            <div>
-                <p>Whisky Mac</p>
-                <button class="self-start"><i class="fa fa-heart-o"></i></button>
-            </div>
-        </div>
+    <section class="container" id="drink-container">
+
     </section>
 
     <section class="container hidden" id="fav-container">
 
     </section>
+    <footer class ="bg-yellow-50">
+        <h4> Created by team 4: Logan Parke, Juliana Wilcox, Luke Sturgill, and Reagan Bodily</h4>
+    </footer>
 
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -153,6 +156,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script> -->
     <script src="./assets/script.js" defer></script>
+    
 </body>
-
+<!--testing branch-->
 </html>
