@@ -408,12 +408,102 @@ var displayFavorites = function(favId) {
             var ingList = document.createElement('ul');
             innerDivEl.appendChild(ingList);
 
-            for(var i=0; i < 20; i++){
+
                 var listItem = document.createElement('li');
                 listItem.textContent = data.meals[0].strIngredient1 + ": " + data.meals[0].strMeasure1;
                 ingList.appendChild(listItem);
-            }
 
+                var listItem = document.createElement('li');
+                listItem.textContent = data.meals[0].strIngredient2 + ": " + data.meals[0].strMeasure2;
+                ingList.appendChild(listItem);
+
+                var listItem = document.createElement('li');
+                listItem.textContent = data.meals[0].strIngredient3 + ": " + data.meals[0].strMeasure3;
+                ingList.appendChild(listItem);
+                
+                var listItem = document.createElement('li');
+                listItem.textContent = data.meals[0].strIngredient4 + ": " + data.meals[0].strMeasure4;
+                ingList.appendChild(listItem);
+                
+                var listItem = document.createElement('li');
+                listItem.textContent = data.meals[0].strIngredient5 + ": " + data.meals[0].strMeasure5;
+                ingList.appendChild(listItem);
+                
+                if (data.meals[0].strIngredient6 != ""){
+                    var listItem = document.createElement('li');
+                    listItem.textContent = data.meals[0].strIngredient6 + ": " + data.meals[0].strMeasure6;
+                    ingList.appendChild(listItem);
+                }
+                if (data.meals[0].strIngredient7 != ""){
+                var listItem = document.createElement('li');
+                listItem.textContent = data.meals[0].strIngredient7 + ": " + data.meals[0].strMeasure7;
+                ingList.appendChild(listItem);
+                }
+                if (data.meals[0].strIngredient8 != ""){
+                var listItem = document.createElement('li');
+                listItem.textContent = data.meals[0].strIngredient8 + ": " + data.meals[0].strMeasure8;
+                ingList.appendChild(listItem);
+                }
+                if (data.meals[0].strIngredient9 != ""){
+                var listItem = document.createElement('li');
+                listItem.textContent = data.meals[0].strIngredient9 + ": " + data.meals[0].strMeasure9;
+                ingList.appendChild(listItem);
+                }
+                if (data.meals[0].strIngredient10 != ""){
+                var listItem = document.createElement('li');
+                listItem.textContent = data.meals[0].strIngredient10 + ": " + data.meals[0].strMeasure10;
+                ingList.appendChild(listItem);
+                }
+                if (data.meals[0].strIngredient11 != ""){
+                var listItem = document.createElement('li');
+                listItem.textContent = data.meals[0].strIngredient11 + ": " + data.meals[0].strMeasure11;
+                ingList.appendChild(listItem);
+                }
+                if (data.meals[0].strIngredient12 != ""){
+                var listItem = document.createElement('li');
+                listItem.textContent = data.meals[0].strIngredient12 + ": " + data.meals[0].strMeasure12;
+                ingList.appendChild(listItem);
+                }
+                if (data.meals[0].strIngredient13 != ""){
+                var listItem = document.createElement('li');
+                listItem.textContent = data.meals[0].strIngredient13 + ": " + data.meals[0].strMeasure13;
+                ingList.appendChild(listItem);
+                }
+                if (data.meals[0].strIngredient14 != ""){
+                var listItem = document.createElement('li');
+                listItem.textContent = data.meals[0].strIngredient14 + ": " + data.meals[0].strMeasure14;
+                ingList.appendChild(listItem);
+                }
+                if (data.meals[0].strIngredient15 != ""){
+                var listItem = document.createElement('li');
+                listItem.textContent = data.meals[0].strIngredient15 + ": " + data.meals[0].strMeasure15;
+                ingList.appendChild(listItem);
+                }
+                if (data.meals[0].strIngredient16 != ""){
+                var listItem = document.createElement('li');
+                listItem.textContent = data.meals[0].strIngredient16 + ": " + data.meals[0].strMeasure16;
+                ingList.appendChild(listItem);
+                }
+                if (data.meals[0].strIngredient17 != ""){
+                var listItem = document.createElement('li');
+                listItem.textContent = data.meals[0].strIngredient17 + ": " + data.meals[0].strMeasure17;
+                ingList.appendChild(listItem);
+                }
+                if (data.meals[0].strIngredient18 != ""){
+                var listItem = document.createElement('li');
+                listItem.textContent = data.meals[0].strIngredient18 + ": " + data.meals[0].strMeasure18;
+                ingList.appendChild(listItem);
+                }
+                if (data.meals[0].strIngredient19 != ""){
+                var listItem = document.createElement('li');
+                listItem.textContent = data.meals[0].strIngredient19 + ": " + data.meals[0].strMeasure19;
+                ingList.appendChild(listItem);
+                }
+                if (data.meals[0].strIngredient20 != ""){
+                var listItem = document.createElement('li');
+                listItem.textContent = data.meals[0].strIngredient20 + ": " + data.meals[0].strMeasure20;
+                ingList.appendChild(listItem);
+                }
             var instructions = document.createElement('p');
             instructions.textContent = data.meals[0].strInstructions;
             innerDivEl.appendChild(instructions);
