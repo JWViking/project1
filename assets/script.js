@@ -25,8 +25,6 @@ var favContainerEl = document.getElementById('fav-container');
 
 var drinkContainerEl = document.getElementById("drink-container");
 
-getDefaultMeals ();
-
 
 var foodCatModalSearch = function() {
     foodOptEl.classList.add('hidden');
@@ -455,3 +453,6 @@ document.addEventListener('click', function(e) {
         favContainerEl.classList.remove('hidden');
     } 
 })
+
+getDefaultMeals ();
+console.log(getDefaultMeals);
