@@ -317,6 +317,7 @@ getCategoryDrinks = function () {
     });
     drinkCatInputEl.value = "";
 }
+
 // https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic
 getAlcoholDrinks = function (alc) {
     fetch("https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=" + alc).then(function (response) {
@@ -325,6 +326,7 @@ getAlcoholDrinks = function (alc) {
         });
     });
 }
+
 // https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Vodka
 getIngredientDrinks = function () {
     var ingredient = drinkIngInputEl.value;
@@ -347,6 +349,7 @@ var createDrinkCards = function (data) {
     container.innerHTML = '';
 
     for (const drink of data.drinks) {
+        
         console.log(drink);
         //create card div
         var divEl = document.createElement("div");
@@ -370,17 +373,14 @@ var createDrinkCards = function (data) {
         //create button
         var buttonEl = document.createElement("button");
         buttonEl.className = "self-start";
-        
         innerDivEl.appendChild(buttonEl);
 
-        var mealId = meal.idMeal;
-        console.log(mealId)
+        var drinkId = drink.idDrink;
         buttonEl.setAttribute('id', 'fav-drink-button');
-        buttonEl.setAttribute('data-id', mealId);
+        buttonEl.setAttribute('data-id', drinkId);
         buttonEl.classList.add('w-1/2', 'h-14', 'm-1', 'bg-red-900', 'hover:bg-red-600', 'text-white', 'text-sm', 'font-bold', 'py-2', 'px-4', 'rounded');
         buttonEl.textContent = 'Add to Favorites';
     };
-
 };
 
 
