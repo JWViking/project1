@@ -455,4 +455,3 @@ document.addEventListener('click', function(e) {
 })
 
 getDefaultMeals ();
-console.log(getDefaultMeals);
