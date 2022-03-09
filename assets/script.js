@@ -208,6 +208,7 @@ var getLetterMeals = function () {
 
 var getCategoryMeals = function () {
     var category = foodCatInputEl.value;
+
     fetch("https://www.themealdb.com/api/json/v1/1/filter.php?c=" + category).then(function (response) {
         response.json().then(function (data) {
             createMealCards(data);
@@ -232,6 +233,7 @@ var getMainIngredientMeals = function () {
 
 var getAreaMeals = function () {
     var area = foodAreaInputEl.value;
+
     fetch("https://www.themealdb.com/api/json/v1/1/filter.php?a=" + area).then(function (response) {
         response.json().then(function (data) {
             createMealCards(data);
