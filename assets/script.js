@@ -29,6 +29,7 @@ var drinkIngInputEl = document.getElementById('drink-ing-input');
 var favContainerEl = document.getElementById('fav-container');
 
 var drinkContainerEl = document.getElementById("drink-container");
+var foodContEl = document.getElementById("food-container");
 
 
 var foodCatModalSearch = function() {
@@ -73,9 +74,15 @@ var foodAreaModalSearch = function() {
                 for(var i=0; i < data.meals.length; i++){
                     foodAreaNames.push(data.meals[i].strArea);
                 }
+<<<<<<< HEAD
             }
         });
     });
+=======
+            };
+        })
+    })
+>>>>>>> 176d681bc6724eae19dab7eed714129874cbaf4a
 }
 
 
@@ -164,6 +171,7 @@ $(function() {
 });
 
 
+<<<<<<< HEAD
 
 //Declaring name of favorites button
 var favoritesBtn = document.getElementById("favs-btn");
@@ -198,6 +206,8 @@ $(heartRecipeEl).on("click",function(){
 
 
 
+=======
+>>>>>>> 176d681bc6724eae19dab7eed714129874cbaf4a
 var getLetterMeals = function () {
     fetch("https://www.themealdb.com/api/json/v1/1/search.php?f=b").then(function (response) {
         response.json().then(function (data) {
@@ -208,7 +218,10 @@ var getLetterMeals = function () {
 
 var getCategoryMeals = function () {
     var category = foodCatInputEl.value;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 176d681bc6724eae19dab7eed714129874cbaf4a
     fetch("https://www.themealdb.com/api/json/v1/1/filter.php?c=" + category).then(function (response) {
         response.json().then(function (data) {
             createMealCards(data);
@@ -233,7 +246,10 @@ var getMainIngredientMeals = function () {
 
 var getAreaMeals = function () {
     var area = foodAreaInputEl.value;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 176d681bc6724eae19dab7eed714129874cbaf4a
     fetch("https://www.themealdb.com/api/json/v1/1/filter.php?a=" + area).then(function (response) {
         response.json().then(function (data) {
             createMealCards(data);
@@ -341,6 +357,10 @@ var createDrinkCards = function (data) {
 
     for (const drink of data.drinks) {
         
+<<<<<<< HEAD
+=======
+
+>>>>>>> 176d681bc6724eae19dab7eed714129874cbaf4a
         //create card div
         var divEl = document.createElement("div");
         divEl.className = "card";
@@ -375,6 +395,7 @@ var createDrinkCards = function (data) {
 
 
 var favIdStorage = [];
+var favDrinkIdStorage = [];
 
 document.addEventListener('click',function(e){
     if(e.target && e.target.id== 'fav-food-button'){
@@ -385,7 +406,15 @@ document.addEventListener('click',function(e){
         localStorage.setItem("favorites", JSON.stringify(favIdStorage));
     }
 });
-
+window.addEventListener('click', (e)=>{
+    if(e.target && e.target.id== 'drink-button'){
+        var element = e.target;
+        var drinkId = element.getAttribute('data-id');
+        favDrinkIdStorage.push(drinkId);
+        displayFavoriteDrinks(drinkId);
+        localStorage.setItem("favorite-drinks", JSON.stringify(favDrinkIdStorage));
+    }
+});
 
 
 var displayFavorites = function(favId) {
@@ -407,9 +436,14 @@ var displayFavorites = function(favId) {
             mealName.textContent = data.meals[0].strMeal;
             innerDivEl.appendChild(mealName);
 
-            var ingList = document.createElement('ul');
-            innerDivEl.appendChild(ingList);
+            var seeRecipe = document.createElement("a");
+            seeRecipe.textContent = "Go to Recipe";
+            seeRecipe.classList = "text-center";
+            seeRecipe.setAttribute("href", "./assets/foodrecipe.html?=" + favId );
+            seeRecipe.setAttribute("target", "_blank");
+            innerDivEl.appendChild(seeRecipe);
 
+<<<<<<< HEAD
 
                 var listItem = document.createElement('li');
                 listItem.textContent = data.meals[0].strIngredient1 + ": " + data.meals[0].strMeasure1;
@@ -509,6 +543,37 @@ var displayFavorites = function(favId) {
             var instructions = document.createElement('p');
             instructions.textContent = data.meals[0].strInstructions;
             innerDivEl.appendChild(instructions);
+=======
+        });
+    });
+}
+var displayFavoriteDrinks = function(drinkId) {
+    var apiUrl = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=" + drinkId;
+    fetch(apiUrl).then(function(response) {
+        response.json().then(function(data) {
+            var divEl = document.createElement("div");
+            divEl.className = "fav-card";
+            favContainerEl.appendChild(divEl);
+
+            var mealPic = document.createElement("img");
+            mealPic.src = data.drinks[0].strDrinkThumb;
+            divEl.appendChild(mealPic);
+
+            var innerDivEl = document.createElement('div');
+            divEl.appendChild(innerDivEl);
+
+            var drinkName = document.createElement('h1');
+            drinkName.textContent = data.drinks[0].strDrink;
+            innerDivEl.appendChild(drinkName);
+
+            var seeRecipe = document.createElement("a");
+            seeRecipe.textContent = "Go to Recipe";
+            seeRecipe.classList = "object-center";
+            seeRecipe.setAttribute("href", "./assets/drinkrecipe.html?=" + drinkId);
+            seeRecipe.setAttribute("target", "_blank");
+            innerDivEl.appendChild(seeRecipe);
+
+>>>>>>> 176d681bc6724eae19dab7eed714129874cbaf4a
         });
     });
 }
@@ -524,6 +589,18 @@ var displayStorage = function() {
     }
 }
 displayStorage();
+
+var displayDrinkStorage = function() {
+    var getFavoriteDrinks = JSON.parse(localStorage.getItem("favorite-drinks"));
+
+
+    if (getFavoriteDrinks) {
+        for(var i=0; i< getFavoriteDrinks.length; i++){
+            displayFavoriteDrinks(getFavoriteDrinks[i]);
+        }
+    }
+}
+displayDrinkStorage();
 
 
 // We want the modal to open when the Open button is clicked
@@ -552,6 +629,10 @@ document.addEventListener('click', function(e) {
     } else if (e.target && e.target.id === 'cat-drinks') {
         drinkCatContainerEl.classList.remove('hidden');
         drinkOptEl.classList.add('hidden');
+<<<<<<< HEAD
+=======
+        
+>>>>>>> 176d681bc6724eae19dab7eed714129874cbaf4a
         drinkCatModalSearch();
     } else if (e.target && e.target.id === 'sub-drink-cat') {
         getCategoryDrinks();
