@@ -74,15 +74,9 @@ var foodAreaModalSearch = function() {
                 for(var i=0; i < data.meals.length; i++){
                     foodAreaNames.push(data.meals[i].strArea);
                 }
-<<<<<<< HEAD
-            }
-        });
-    });
-=======
             };
         })
     })
->>>>>>> 176d681bc6724eae19dab7eed714129874cbaf4a
 }
 
 
@@ -171,43 +165,6 @@ $(function() {
 });
 
 
-<<<<<<< HEAD
-
-//Declaring name of favorites button
-var favoritesBtn = document.getElementById("favs-btn");
-// Declaring food container name
-var foodContEl = document.getElementById("food-container");
-// Laying out each card for testing purposes
-var cardEl = $(".card");
-var imgEl = $("img");
-var recipeNameEl = $("p")
-//Declaring name of hearts
-var heartRecipeEl = $(".self-start");
-
-
-// array for saving recipe url's to Local Storage
-var favRecipies = JSON.parse(localStorage.getItem("recipe-URL")) || [];
-
-
-// Save URLs of recipes saved
-
-
-$(heartRecipeEl).on("click",function(){
-    var selectedRecipe = $(this).parent();
-    var selectedImage = $(selectedRecipe).siblings("img");
-    // imgURL represents the link
-    var imgUrl = selectedImage.attr('src');
-
-    favRecipies.push(imgUrl);
-    localStorage.setItem("recipe-URL", JSON.stringify(favRecipies));
-
-
-})
-
-
-
-=======
->>>>>>> 176d681bc6724eae19dab7eed714129874cbaf4a
 var getLetterMeals = function () {
     fetch("https://www.themealdb.com/api/json/v1/1/search.php?f=b").then(function (response) {
         response.json().then(function (data) {
@@ -218,10 +175,6 @@ var getLetterMeals = function () {
 
 var getCategoryMeals = function () {
     var category = foodCatInputEl.value;
-<<<<<<< HEAD
-
-=======
->>>>>>> 176d681bc6724eae19dab7eed714129874cbaf4a
     fetch("https://www.themealdb.com/api/json/v1/1/filter.php?c=" + category).then(function (response) {
         response.json().then(function (data) {
             createMealCards(data);
@@ -246,10 +199,6 @@ var getMainIngredientMeals = function () {
 
 var getAreaMeals = function () {
     var area = foodAreaInputEl.value;
-<<<<<<< HEAD
-
-=======
->>>>>>> 176d681bc6724eae19dab7eed714129874cbaf4a
     fetch("https://www.themealdb.com/api/json/v1/1/filter.php?a=" + area).then(function (response) {
         response.json().then(function (data) {
             createMealCards(data);
@@ -357,10 +306,6 @@ var createDrinkCards = function (data) {
 
     for (const drink of data.drinks) {
         
-<<<<<<< HEAD
-=======
-
->>>>>>> 176d681bc6724eae19dab7eed714129874cbaf4a
         //create card div
         var divEl = document.createElement("div");
         divEl.className = "card";
@@ -443,107 +388,6 @@ var displayFavorites = function(favId) {
             seeRecipe.setAttribute("target", "_blank");
             innerDivEl.appendChild(seeRecipe);
 
-<<<<<<< HEAD
-
-                var listItem = document.createElement('li');
-                listItem.textContent = data.meals[0].strIngredient1 + ": " + data.meals[0].strMeasure1;
-                ingList.appendChild(listItem);
-
-                var listItem = document.createElement('li');
-                listItem.textContent = data.meals[0].strIngredient2 + ": " + data.meals[0].strMeasure2;
-                ingList.appendChild(listItem);
-
-                var listItem = document.createElement('li');
-                listItem.textContent = data.meals[0].strIngredient3 + ": " + data.meals[0].strMeasure3;
-                ingList.appendChild(listItem);
-                
-                var listItem = document.createElement('li');
-                listItem.textContent = data.meals[0].strIngredient4 + ": " + data.meals[0].strMeasure4;
-                ingList.appendChild(listItem);
-                
-                var listItem = document.createElement('li');
-                listItem.textContent = data.meals[0].strIngredient5 + ": " + data.meals[0].strMeasure5;
-                ingList.appendChild(listItem);
-                
-                if (data.meals[0].strIngredient6 != ""){
-                    var listItem = document.createElement('li');
-                    listItem.textContent = data.meals[0].strIngredient6 + ": " + data.meals[0].strMeasure6;
-                    ingList.appendChild(listItem);
-                }
-                if (data.meals[0].strIngredient7 != ""){
-                var listItem = document.createElement('li');
-                listItem.textContent = data.meals[0].strIngredient7 + ": " + data.meals[0].strMeasure7;
-                ingList.appendChild(listItem);
-                }
-                if (data.meals[0].strIngredient8 != ""){
-                var listItem = document.createElement('li');
-                listItem.textContent = data.meals[0].strIngredient8 + ": " + data.meals[0].strMeasure8;
-                ingList.appendChild(listItem);
-                }
-                if (data.meals[0].strIngredient9 != ""){
-                var listItem = document.createElement('li');
-                listItem.textContent = data.meals[0].strIngredient9 + ": " + data.meals[0].strMeasure9;
-                ingList.appendChild(listItem);
-                }
-                if (data.meals[0].strIngredient10 != ""){
-                var listItem = document.createElement('li');
-                listItem.textContent = data.meals[0].strIngredient10 + ": " + data.meals[0].strMeasure10;
-                ingList.appendChild(listItem);
-                }
-                if (data.meals[0].strIngredient11 != ""){
-                var listItem = document.createElement('li');
-                listItem.textContent = data.meals[0].strIngredient11 + ": " + data.meals[0].strMeasure11;
-                ingList.appendChild(listItem);
-                }
-                if (data.meals[0].strIngredient12 != ""){
-                var listItem = document.createElement('li');
-                listItem.textContent = data.meals[0].strIngredient12 + ": " + data.meals[0].strMeasure12;
-                ingList.appendChild(listItem);
-                }
-                if (data.meals[0].strIngredient13 != ""){
-                var listItem = document.createElement('li');
-                listItem.textContent = data.meals[0].strIngredient13 + ": " + data.meals[0].strMeasure13;
-                ingList.appendChild(listItem);
-                }
-                if (data.meals[0].strIngredient14 != ""){
-                var listItem = document.createElement('li');
-                listItem.textContent = data.meals[0].strIngredient14 + ": " + data.meals[0].strMeasure14;
-                ingList.appendChild(listItem);
-                }
-                if (data.meals[0].strIngredient15 != ""){
-                var listItem = document.createElement('li');
-                listItem.textContent = data.meals[0].strIngredient15 + ": " + data.meals[0].strMeasure15;
-                ingList.appendChild(listItem);
-                }
-                if (data.meals[0].strIngredient16 != ""){
-                var listItem = document.createElement('li');
-                listItem.textContent = data.meals[0].strIngredient16 + ": " + data.meals[0].strMeasure16;
-                ingList.appendChild(listItem);
-                }
-                if (data.meals[0].strIngredient17 != ""){
-                var listItem = document.createElement('li');
-                listItem.textContent = data.meals[0].strIngredient17 + ": " + data.meals[0].strMeasure17;
-                ingList.appendChild(listItem);
-                }
-                if (data.meals[0].strIngredient18 != ""){
-                var listItem = document.createElement('li');
-                listItem.textContent = data.meals[0].strIngredient18 + ": " + data.meals[0].strMeasure18;
-                ingList.appendChild(listItem);
-                }
-                if (data.meals[0].strIngredient19 != ""){
-                var listItem = document.createElement('li');
-                listItem.textContent = data.meals[0].strIngredient19 + ": " + data.meals[0].strMeasure19;
-                ingList.appendChild(listItem);
-                }
-                if (data.meals[0].strIngredient20 != ""){
-                var listItem = document.createElement('li');
-                listItem.textContent = data.meals[0].strIngredient20 + ": " + data.meals[0].strMeasure20;
-                ingList.appendChild(listItem);
-                }
-            var instructions = document.createElement('p');
-            instructions.textContent = data.meals[0].strInstructions;
-            innerDivEl.appendChild(instructions);
-=======
         });
     });
 }
@@ -573,7 +417,6 @@ var displayFavoriteDrinks = function(drinkId) {
             seeRecipe.setAttribute("target", "_blank");
             innerDivEl.appendChild(seeRecipe);
 
->>>>>>> 176d681bc6724eae19dab7eed714129874cbaf4a
         });
     });
 }
@@ -629,10 +472,7 @@ document.addEventListener('click', function(e) {
     } else if (e.target && e.target.id === 'cat-drinks') {
         drinkCatContainerEl.classList.remove('hidden');
         drinkOptEl.classList.add('hidden');
-<<<<<<< HEAD
-=======
         
->>>>>>> 176d681bc6724eae19dab7eed714129874cbaf4a
         drinkCatModalSearch();
     } else if (e.target && e.target.id === 'sub-drink-cat') {
         getCategoryDrinks();
