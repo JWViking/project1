@@ -1,0 +1,42 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background-color: rgb(61, 61, 61);
+    color:white;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+section{
+    padding:60px;
+}
+header{
+    height: 100px;
+    color: rgb(88, 79, 47)
+}
+header h1{
+    font-size: 35px;
+}
+.hero{
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    background-attachment: fixed;
+    background-position: 80%;
+}
+
+.ingredients{
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 20px;
+}
+#recipe-text{
+    font-size: 20px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}

@@ -29,6 +29,7 @@ var drinkIngInputEl = document.getElementById('drink-ing-input');
 var favContainerEl = document.getElementById('fav-container');
 
 var drinkContainerEl = document.getElementById("drink-container");
+var foodContEl = document.getElementById("food-container");
 
 
 var foodCatModalSearch = function() {
@@ -73,9 +74,9 @@ var foodAreaModalSearch = function() {
                 for(var i=0; i < data.meals.length; i++){
                     foodAreaNames.push(data.meals[i].strArea);
                 }
-            }
-        });
-    });
+            };
+        })
+    })
 }
 
 
@@ -164,40 +165,6 @@ $(function() {
 });
 
 
-
-//Declaring name of favorites button
-var favoritesBtn = document.getElementById("favs-btn");
-// Declaring food container name
-var foodContEl = document.getElementById("food-container");
-// Laying out each card for testing purposes
-var cardEl = $(".card");
-var imgEl = $("img");
-var recipeNameEl = $("p")
-//Declaring name of hearts
-var heartRecipeEl = $(".self-start");
-
-
-// array for saving recipe url's to Local Storage
-var favRecipies = JSON.parse(localStorage.getItem("recipe-URL")) || [];
-
-
-// Save URLs of recipes saved
-
-
-$(heartRecipeEl).on("click",function(){
-    var selectedRecipe = $(this).parent();
-    var selectedImage = $(selectedRecipe).siblings("img");
-    // imgURL represents the link
-    var imgUrl = selectedImage.attr('src');
-
-    favRecipies.push(imgUrl);
-    localStorage.setItem("recipe-URL", JSON.stringify(favRecipies));
-
-
-})
-
-
-
 var getLetterMeals = function () {
     fetch("https://www.themealdb.com/api/json/v1/1/search.php?f=b").then(function (response) {
         response.json().then(function (data) {
@@ -208,7 +175,6 @@ var getLetterMeals = function () {
 
 var getCategoryMeals = function () {
     var category = foodCatInputEl.value;
-
     fetch("https://www.themealdb.com/api/json/v1/1/filter.php?c=" + category).then(function (response) {
         response.json().then(function (data) {
             createMealCards(data);
@@ -233,7 +199,6 @@ var getMainIngredientMeals = function () {
 
 var getAreaMeals = function () {
     var area = foodAreaInputEl.value;
-
     fetch("https://www.themealdb.com/api/json/v1/1/filter.php?a=" + area).then(function (response) {
         response.json().then(function (data) {
             createMealCards(data);
@@ -375,6 +340,7 @@ var createDrinkCards = function (data) {
 
 
 var favIdStorage = [];
+var favDrinkIdStorage = [];
 
 document.addEventListener('click',function(e){
     if(e.target && e.target.id== 'fav-food-button'){
@@ -385,7 +351,15 @@ document.addEventListener('click',function(e){
         localStorage.setItem("favorites", JSON.stringify(favIdStorage));
     }
 });
-
+window.addEventListener('click', (e)=>{
+    if(e.target && e.target.id== 'fav-drink-button'){
+        var element = e.target;
+        var drinkId = element.getAttribute('data-id');
+        favDrinkIdStorage.push(drinkId);
+        displayFavoriteDrinks(drinkId);
+        localStorage.setItem("favorite-drinks", JSON.stringify(favDrinkIdStorage));
+    }
+});
 
 
 var displayFavorites = function(favId) {
@@ -407,108 +381,42 @@ var displayFavorites = function(favId) {
             mealName.textContent = data.meals[0].strMeal;
             innerDivEl.appendChild(mealName);
 
-            var ingList = document.createElement('ul');
-            innerDivEl.appendChild(ingList);
+            var seeRecipe = document.createElement("a");
+            seeRecipe.textContent = "Go to Recipe";
+            seeRecipe.classList = "text-center";
+            seeRecipe.setAttribute("href", "./assets/foodrecipe.html?=" + favId );
+            seeRecipe.setAttribute("target", "_blank");
+            innerDivEl.appendChild(seeRecipe);
 
+        });
+    });
+}
+var displayFavoriteDrinks = function(drinkId) {
+    var apiUrl = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=" + drinkId;
+    fetch(apiUrl).then(function(response) {
+        response.json().then(function(data) {
+            var divEl = document.createElement("div");
+            divEl.className = "fav-card";
+            favContainerEl.appendChild(divEl);
 
-                var listItem = document.createElement('li');
-                listItem.textContent = data.meals[0].strIngredient1 + ": " + data.meals[0].strMeasure1;
-                ingList.appendChild(listItem);
+            var mealPic = document.createElement("img");
+            mealPic.src = data.drinks[0].strDrinkThumb;
+            divEl.appendChild(mealPic);
 
-                var listItem = document.createElement('li');
-                listItem.textContent = data.meals[0].strIngredient2 + ": " + data.meals[0].strMeasure2;
-                ingList.appendChild(listItem);
+            var innerDivEl = document.createElement('div');
+            divEl.appendChild(innerDivEl);
 
-                var listItem = document.createElement('li');
-                listItem.textContent = data.meals[0].strIngredient3 + ": " + data.meals[0].strMeasure3;
-                ingList.appendChild(listItem);
-                
-                var listItem = document.createElement('li');
-                listItem.textContent = data.meals[0].strIngredient4 + ": " + data.meals[0].strMeasure4;
-                ingList.appendChild(listItem);
-                
-                var listItem = document.createElement('li');
-                listItem.textContent = data.meals[0].strIngredient5 + ": " + data.meals[0].strMeasure5;
-                ingList.appendChild(listItem);
-                
-                if (data.meals[0].strIngredient6 != ""){
-                    var listItem = document.createElement('li');
-                    listItem.textContent = data.meals[0].strIngredient6 + ": " + data.meals[0].strMeasure6;
-                    ingList.appendChild(listItem);
-                }
-                if (data.meals[0].strIngredient7 != ""){
-                var listItem = document.createElement('li');
-                listItem.textContent = data.meals[0].strIngredient7 + ": " + data.meals[0].strMeasure7;
-                ingList.appendChild(listItem);
-                }
-                if (data.meals[0].strIngredient8 != ""){
-                var listItem = document.createElement('li');
-                listItem.textContent = data.meals[0].strIngredient8 + ": " + data.meals[0].strMeasure8;
-                ingList.appendChild(listItem);
-                }
-                if (data.meals[0].strIngredient9 != ""){
-                var listItem = document.createElement('li');
-                listItem.textContent = data.meals[0].strIngredient9 + ": " + data.meals[0].strMeasure9;
-                ingList.appendChild(listItem);
-                }
-                if (data.meals[0].strIngredient10 != ""){
-                var listItem = document.createElement('li');
-                listItem.textContent = data.meals[0].strIngredient10 + ": " + data.meals[0].strMeasure10;
-                ingList.appendChild(listItem);
-                }
-                if (data.meals[0].strIngredient11 != ""){
-                var listItem = document.createElement('li');
-                listItem.textContent = data.meals[0].strIngredient11 + ": " + data.meals[0].strMeasure11;
-                ingList.appendChild(listItem);
-                }
-                if (data.meals[0].strIngredient12 != ""){
-                var listItem = document.createElement('li');
-                listItem.textContent = data.meals[0].strIngredient12 + ": " + data.meals[0].strMeasure12;
-                ingList.appendChild(listItem);
-                }
-                if (data.meals[0].strIngredient13 != ""){
-                var listItem = document.createElement('li');
-                listItem.textContent = data.meals[0].strIngredient13 + ": " + data.meals[0].strMeasure13;
-                ingList.appendChild(listItem);
-                }
-                if (data.meals[0].strIngredient14 != ""){
-                var listItem = document.createElement('li');
-                listItem.textContent = data.meals[0].strIngredient14 + ": " + data.meals[0].strMeasure14;
-                ingList.appendChild(listItem);
-                }
-                if (data.meals[0].strIngredient15 != ""){
-                var listItem = document.createElement('li');
-                listItem.textContent = data.meals[0].strIngredient15 + ": " + data.meals[0].strMeasure15;
-                ingList.appendChild(listItem);
-                }
-                if (data.meals[0].strIngredient16 != ""){
-                var listItem = document.createElement('li');
-                listItem.textContent = data.meals[0].strIngredient16 + ": " + data.meals[0].strMeasure16;
-                ingList.appendChild(listItem);
-                }
-                if (data.meals[0].strIngredient17 != ""){
-                var listItem = document.createElement('li');
-                listItem.textContent = data.meals[0].strIngredient17 + ": " + data.meals[0].strMeasure17;
-                ingList.appendChild(listItem);
-                }
-                if (data.meals[0].strIngredient18 != ""){
-                var listItem = document.createElement('li');
-                listItem.textContent = data.meals[0].strIngredient18 + ": " + data.meals[0].strMeasure18;
-                ingList.appendChild(listItem);
-                }
-                if (data.meals[0].strIngredient19 != ""){
-                var listItem = document.createElement('li');
-                listItem.textContent = data.meals[0].strIngredient19 + ": " + data.meals[0].strMeasure19;
-                ingList.appendChild(listItem);
-                }
-                if (data.meals[0].strIngredient20 != ""){
-                var listItem = document.createElement('li');
-                listItem.textContent = data.meals[0].strIngredient20 + ": " + data.meals[0].strMeasure20;
-                ingList.appendChild(listItem);
-                }
-            var instructions = document.createElement('p');
-            instructions.textContent = data.meals[0].strInstructions;
-            innerDivEl.appendChild(instructions);
+            var drinkName = document.createElement('h1');
+            drinkName.textContent = data.drinks[0].strDrink;
+            innerDivEl.appendChild(drinkName);
+
+            var seeRecipe = document.createElement("a");
+            seeRecipe.textContent = "Go to Recipe";
+            seeRecipe.classList = "object-center";
+            seeRecipe.setAttribute("href", "./assets/drinkrecipe.html?=" + drinkId);
+            seeRecipe.setAttribute("target", "_blank");
+            innerDivEl.appendChild(seeRecipe);
+
         });
     });
 }
@@ -524,6 +432,18 @@ var displayStorage = function() {
     }
 }
 displayStorage();
+
+var displayDrinkStorage = function() {
+    var getFavoriteDrinks = JSON.parse(localStorage.getItem("favorite-drinks"));
+
+
+    if (getFavoriteDrinks) {
+        for(var i=0; i< getFavoriteDrinks.length; i++){
+            displayFavoriteDrinks(getFavoriteDrinks[i]);
+        }
+    }
+}
+displayDrinkStorage();
 
 
 // We want the modal to open when the Open button is clicked
@@ -552,6 +472,7 @@ document.addEventListener('click', function(e) {
     } else if (e.target && e.target.id === 'cat-drinks') {
         drinkCatContainerEl.classList.remove('hidden');
         drinkOptEl.classList.add('hidden');
+        
         drinkCatModalSearch();
     } else if (e.target && e.target.id === 'sub-drink-cat') {
         getCategoryDrinks();
