@@ -352,7 +352,7 @@ document.addEventListener('click',function(e){
     }
 });
 window.addEventListener('click', (e)=>{
-    if(e.target && e.target.id== 'drink-button'){
+    if(e.target && e.target.id== 'fav-drink-button'){
         var element = e.target;
         var drinkId = element.getAttribute('data-id');
         favDrinkIdStorage.push(drinkId);

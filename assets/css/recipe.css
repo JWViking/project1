@@ -5,6 +5,7 @@
 }
 body {
     background-color: rgb(61, 61, 61);
+    color:white;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -14,6 +15,7 @@ section{
 }
 header{
     height: 100px;
+    color: rgb(88, 79, 47)
 }
 header h1{
     font-size: 35px;
