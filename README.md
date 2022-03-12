@@ -20,19 +20,18 @@ Autocomplete helps me search and I can narrow down the recipes in my viewing win
 I can save favorite recipes for future use
 
 ## Applications used:
--Tailwind
--JQuery
--CSS
--HTML
--JavaScript
--TheCocktailDB.com
--MealDB.com
+*JQuery
+*CSS
+*HTML
+*JavaScript
+*TheCocktailDB.com
+*MealDB.com
 
 ## Website:
 https://jwviking.github.io/project1/
 
 ### Contribution by:
--Juliana Wilcox
--Logan Parke
--Reagan Bodily
--Luke Sturgill
+*Juliana Wilcox
+*Logan Parke
+*Reagan Bodily
+*Luke Sturgill
