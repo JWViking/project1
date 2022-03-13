@@ -384,7 +384,7 @@ var displayFavorites = function(favId) {
             var seeRecipe = document.createElement("a");
             seeRecipe.textContent = "Go to Recipe";
             seeRecipe.classList = "text-center";
-            seeRecipe.setAttribute("href", "./assets/foodrecipe.html?=" + favId );
+            seeRecipe.setAttribute("href", "./assets/foodRecipe.html?=" + favId );
             seeRecipe.setAttribute("target", "_blank");
             innerDivEl.appendChild(seeRecipe);
 
@@ -413,7 +413,7 @@ var displayFavoriteDrinks = function(drinkId) {
             var seeRecipe = document.createElement("a");
             seeRecipe.textContent = "Go to Recipe";
             seeRecipe.classList = "object-center";
-            seeRecipe.setAttribute("href", "./assets/drinkrecipe.html?=" + drinkId);
+            seeRecipe.setAttribute("href", "./assets/drinkRecipe.html?=" + drinkId);
             seeRecipe.setAttribute("target", "_blank");
             innerDivEl.appendChild(seeRecipe);
 
