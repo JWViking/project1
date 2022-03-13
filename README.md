@@ -30,6 +30,11 @@ I can save favorite recipes for future use
 ## Website:
 https://jwviking.github.io/project1/
 
+##Deployed Website Image:
+<img width="1265" alt="Screen Shot 2022-03-13 at 4 42 39 PM" src="https://user-images.githubusercontent.com/97365590/158082327-6efa40b2-6fa7-4bce-a9cb-f908f22c43f7.png">
+<img width="1251" alt="Screen Shot 2022-03-13 at 4 42 14 PM" src="https://user-images.githubusercontent.com/97365590/158082337-760a481e-acb4-467d-b9a1-474031876ee9.png">
+
+
 ### Contribution by:
 *Juliana Wilcox
 *Logan Parke
